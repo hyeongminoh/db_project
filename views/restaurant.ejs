@@ -1,106 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-  <!-- SITE TITTLE -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>경희대 오늘 뭐 뭐먹지?</title>
-  
-  <!-- PLUGINS CSS STYLE -->
-  <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
-  <!-- Bootstrap -->
-  <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Owl Carousel -->
-  <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
-  <!-- Fancy Box -->
-  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <link href="plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
-  <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
-
-  <!-- FAVICON -->
-  <link href="images/favicon.ico" rel="shortcut icon">
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-</head>
-
-<body class="body-wrapper">
-
-
-<section>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<nav class="navbar navbar-expand-lg  navigation">
-					<a class="navbar-brand" href="/">
-						<img src="images/logo.JPG" alt="">
-					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item active">
-								<a class="nav-link" href="/">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="dashboard.html">소개</a>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									메뉴 <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="category">Category</a>
-									<a class="dropdown-item" href="single">Single Page</a>
-									<a class="dropdown-item" href="store-single">Store Single</a>
-									<a class="dropdown-item" href="dashboard">Dashboard</a>
-									<a class="dropdown-item" href="user-profile">User Profile</a>
-									<a class="dropdown-item" href="submit-coupon">Submit Coupon</a>
-									<a class="dropdown-item" href="blog">Blog</a>
-									<a class="dropdown-item" href="single-blog">Single Post</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									추천 <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Action</a>
-									<a class="dropdown-item" href="#">Another action</a>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</div>
-							</li>
-						</ul>
-						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="/">Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link add-button" href="#"><i class="fa fa-plus-circle"></i> 리뷰 쓰기</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
-
+<% include ./navigator.ejs %>
 
 <!--================================
 =            Page Title            =
@@ -111,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-8 offset-md-2 text-center">
 				<!-- Title text -->
-				<h3>Blog Page</h3>
+				<h3><%=info.name%></h3>
 			</div>
 		</div>
 	</div>
@@ -123,28 +23,43 @@
 
 <section class="blog single-blog section">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+		<!-- <div class="row"> -->
+			<div class="col-md-12">
 				<article class="single-post">
-					<h3>Donec id dolor in erat imperdiet.</h3>
-					<ul class="list-inline">
-						<li class="list-inline-item">by <a href="">Admin</a></li>
-						<li class="list-inline-item">Nov 22, 2016</li>
-					</ul>
-					<img src="images/blog/post-4.jpg" alt="article-01">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt  labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip.ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. 
-					sunt in culpa qui officia deserunt mollit anim id est laborum.</p> 
-					
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-
-					<p>sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-					<ul class="social-circle-icons list-inline">
-				  		<li class="list-inline-item text-center"><a class="fa fa-facebook" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-twitter" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-google-plus" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-pinterest-p" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-linkedin" href=""></a></li>
-				  	</ul>
+					<img src="/images/blog/restaurant_default.jpg" alt="article-01">
+					<p><b>위치</b> : <%=info.location%> <br>
+						<%if (info.time==null){ %>
+							<b>영업 시간</b> : -- <br>
+						<% } else { %>
+							<b>영업 시간</b> : <%=info.time%> <br>
+						<% } %>
+						<b>분류</b> : <%=info.menu_type%><br>
+						<%if (info.reservaion==0){ %>
+							<b>예약 가능 여부</b> : X <br>
+						<% } else {  %>
+							<b>예약 가능 여부</b> : O <br>
+						<% } %>
+						<b>연락처</b> : <%=info.phone%><br></p>
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">menu</th>
+									<th scope="col">가격</th>
+								</tr>
+							</thead>
+							<tbody>
+								<%if (menu.length!=1){ %>
+									<%for (var i =0; i< menu.length; i++){ %>
+									<tr>
+										<th scope="row"> <%=i+1%></th>
+										<td> <%=menu[i].menu_name%></td>
+										<td><%=menu[i].price%></td>
+									</tr>
+									<% } %>
+								<% } %>
+							</tbody>
+						</table>
 				</article>
 				<div class="block comment">
 					<h4>Leave A Comment</h4>
@@ -175,7 +90,7 @@
 				</div>
 			</div>
 			</div>
-		</div>
+		<!-- </div> -->
 	</div>
 </section>
 
@@ -192,7 +107,7 @@
         <!-- About -->
         <div class="block about">
           <!-- footer logo -->
-          <img src="images/logo-footer.png" alt="">
+          <img src="/images/logo-footer.png" alt="">
           <!-- description -->
           <p class="alt-color">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
@@ -229,7 +144,7 @@
         <div class="block-2 app-promotion">
           <a href="">
             <!-- Icon -->
-            <img src="images/footer/phone-icon.png" alt="mobile-icon">
+            <img src="/images/footer/phone-icon.png" alt="mobile-icon">
           </a>
           <p>Get the Dealsy Mobile App and Save more</p>
         </div>
@@ -268,19 +183,19 @@
 </footer>
 
   <!-- JAVASCRIPTS -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script src="plugins/tether/js/tether.min.js"></script>
-  <script src="plugins/raty/jquery.raty-fa.js"></script>
-  <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-  <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-  <script src="plugins/slick-carousel/slick/slick.min.js"></script>
-  <script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="/plugins/tether/js/tether.min.js"></script>
+  <script src="/plugins/raty/jquery.raty-fa.js"></script>
+  <script src="/plugins/bootstrap/dist/js/popper.min.js"></script>
+  <script src="/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+  <script src="/plugins/slick-carousel/slick/slick.min.js"></script>
+  <script src="/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="/plugins/fancybox/jquery.fancybox.pack.js"></script>
+  <script src="/plugins/smoothscroll/SmoothScroll.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-  <script src="js/scripts.js"></script>
+  <script src="/js/scripts.js"></script>
 
 </body>
 

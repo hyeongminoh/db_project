@@ -11,8 +11,13 @@ module.exports = function(app){
 	app.get('/', function(req, res, next) {
   		res.render('index');
 	});
-	app.get('/restaurant', function(req, res, next) {
-		res.render('restaurant');
+
+	app.get('/single', function(req, res, next) {
+		res.render('single');
+  	});
+
+  	app.get('/user', function(req, res, next) {
+		res.render('user-profile');
   	});
 
 

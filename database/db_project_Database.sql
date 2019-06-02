@@ -67,6 +67,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,2,'돈코츠라멘','6500'),(2,2,'탄탄멘','7000'),(3,2,'차슈동','7000'),(4,2,'사케동','7500'),(5,2,'호카레','6000'),(6,2,'연어포케','8000'),(7,2,'만다린 샐러드','3500');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,4 +118,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-02 15:06:34
+-- Dump completed on 2019-06-02 21:59:07

@@ -11,9 +11,8 @@ const mysql = require('mysql');
 const app = express();
 
 // view engine setup
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
 
 //bodyparser
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,18 +21,22 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static('public'));
 
 connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
   port     : 3306,
-  database : 'db_project',
+  database : 'DBProject',
 });
+
 
 const router = require('./routes/router.js')(app);
 const restaurant = require('./routes/restaurant.js')(app);
+
+
 //for pretty print
 app.locals.pretty = true;
 
