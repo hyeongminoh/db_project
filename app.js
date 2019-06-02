@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+const mysql = require('mysql');
 
 const app = express();
 
@@ -23,9 +24,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  port     : 3306,
+  database : 'db_project',
+});
 
 const router = require('./routes/router.js')(app);
-
+const restaurant = require('./routes/restaurant.js')(app);
 //for pretty print
 app.locals.pretty = true;
 

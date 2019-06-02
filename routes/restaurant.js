@@ -7,11 +7,8 @@ module.exports = function(app){
 
 
 
-	/* GET home page. */
-	app.get('/', function(req, res, next) {
-  		res.render('index');
-	});
-	app.get('/restaurant', function(req, res, next) {
+	app.get('/restaurant/:restaurantid', function(req, res, next) {
+        
 		res.render('restaurant');
   	});
 
