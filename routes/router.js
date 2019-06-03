@@ -12,16 +12,20 @@ module.exports = function(app){
   		res.render('index');
 	});
 
+	app.get('/dashboard', function(req, res, next){
+		res.render('dashboard');
+	});
+
+	app.get('/single-blog', function(req, res, next){
+		res.render('single-blog');
+	});
+
 	app.get('/single', function(req, res, next) {
 		res.render('single');
   	});
 
   	app.get('/category', function(req, res, next) {
 		res.render('category');
-  	});
-
-  	app.get('/single-blog', function(req, res, next) {
-		res.render('single-blog');
   	});
 
 
