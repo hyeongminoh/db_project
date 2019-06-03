@@ -16,6 +16,15 @@ module.exports = function(app){
 		res.render('single');
   	});
 
+  	app.get('/category', function(req, res, next) {
+		res.render('category');
+  	});
+
+  	app.get('/single-blog', function(req, res, next) {
+		res.render('single-blog');
+  	});
+
+
   	app.get('/user', function(req, res, next) {
 		res.render('user-profile');
   	});
