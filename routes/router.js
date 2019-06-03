@@ -29,5 +29,4 @@ module.exports = function(app){
 		res.render('user-profile');
   	});
 
-
 }

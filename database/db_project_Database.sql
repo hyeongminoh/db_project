@@ -16,6 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `group_post`
+--
+
+DROP TABLE IF EXISTS `group_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_post` (
+  `idgroup_post` int(11) NOT NULL AUTO_INCREMENT,
+  `user_num` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idgroup_post`),
+  UNIQUE KEY `user_num_UNIQUE` (`user_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `group_post`
 --
 
@@ -23,6 +41,24 @@ LOCK TABLES `group_post` WRITE;
 /*!40000 ALTER TABLE `group_post` DISABLE KEYS */;
 /*!40000 ALTER TABLE `group_post` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `group_reply`
+--
+
+DROP TABLE IF EXISTS `group_reply`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `group_reply` (
+  `idgroup_reply` int(11) NOT NULL AUTO_INCREMENT,
+  `idgroup_post` int(11) NOT NULL,
+  `user_num` int(11) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `reply_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idgroup_reply`),
+  UNIQUE KEY `user_num_UNIQUE` (`user_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `group_reply`
@@ -34,6 +70,20 @@ LOCK TABLES `group_reply` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `hashtag`
+--
+
+DROP TABLE IF EXISTS `hashtag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hashtag` (
+  `idhashtag` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(50) NOT NULL,
+  PRIMARY KEY (`idhashtag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `hashtag`
 --
 
@@ -43,6 +93,22 @@ LOCK TABLES `hashtag` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `hashtag_connection`
+--
+
+DROP TABLE IF EXISTS `hashtag_connection`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hashtag_connection` (
+  `idhashtag_connection` int(11) NOT NULL AUTO_INCREMENT,
+  `idreview` int(11) NOT NULL,
+  `idhashtag` int(11) NOT NULL,
+  `idrestaurant` int(11) NOT NULL,
+  PRIMARY KEY (`idhashtag_connection`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `hashtag_connection`
 --
 
@@ -50,6 +116,22 @@ LOCK TABLES `hashtag_connection` WRITE;
 /*!40000 ALTER TABLE `hashtag_connection` DISABLE KEYS */;
 /*!40000 ALTER TABLE `hashtag_connection` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `location` (
+  `idlocation` int(11) NOT NULL AUTO_INCREMENT,
+  `loc_name` varchar(50) NOT NULL,
+  `time` int(11) NOT NULL,
+  PRIMARY KEY (`idlocation`),
+  UNIQUE KEY `loc_name_UNIQUE` (`loc_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `location`
@@ -62,6 +144,22 @@ INSERT INTO `location` VALUES (1,'정문 건너편',10);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `menu`
+--
+
+DROP TABLE IF EXISTS `menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu` (
+  `idmenu` int(11) NOT NULL AUTO_INCREMENT,
+  `idrestaurant` int(11) NOT NULL,
+  `menu_name` varchar(50) NOT NULL,
+  `price` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idmenu`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `menu`
 --
 
@@ -70,6 +168,21 @@ LOCK TABLES `menu` WRITE;
 INSERT INTO `menu` VALUES (1,2,'돈코츠라멘','6500'),(2,2,'탄탄멘','7000'),(3,2,'차슈동','7000'),(4,2,'사케동','7500'),(5,2,'호카레','6000'),(6,2,'연어포케','8000'),(7,2,'만다린 샐러드','3500');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_type`
+--
+
+DROP TABLE IF EXISTS `menu_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu_type` (
+  `idmenu_type` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  PRIMARY KEY (`idmenu_type`),
+  UNIQUE KEY `type_UNIQUE` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `menu_type`
@@ -82,6 +195,27 @@ INSERT INTO `menu_type` VALUES (5,'분식'),(1,'아시안'),(3,'양식'),(4,'일
 UNLOCK TABLES;
 
 --
+-- Table structure for table `restaurant`
+--
+
+DROP TABLE IF EXISTS `restaurant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restaurant` (
+  `idrestaurant` int(11) NOT NULL AUTO_INCREMENT,
+  `r_name` varchar(50) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `time` varchar(50) DEFAULT NULL,
+  `idmenu_type` int(11) DEFAULT NULL,
+  `reservation` int(11) DEFAULT '0',
+  `phone` int(11) DEFAULT NULL,
+  `idlocation` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idrestaurant`),
+  UNIQUE KEY `idrestaurant_UNIQUE` (`idrestaurant`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `restaurant`
 --
 
@@ -92,6 +226,25 @@ INSERT INTO `restaurant` VALUES (2,'호식당','경기 수원시 영통구 영�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `review`
+--
+
+DROP TABLE IF EXISTS `review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `review` (
+  `idreview` int(11) NOT NULL AUTO_INCREMENT,
+  `user_num` int(11) NOT NULL,
+  `idrestaurant` int(11) NOT NULL,
+  `review` varchar(255) NOT NULL,
+  `star` int(11) DEFAULT '0',
+  `like` int(11) DEFAULT '0',
+  PRIMARY KEY (`idreview`),
+  UNIQUE KEY `user_num_UNIQUE` (`user_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `review`
 --
 
@@ -99,6 +252,25 @@ LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `user_num` int(11) NOT NULL,
+  `pw` varchar(255) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `birth` int(11) NOT NULL,
+  `nickname` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_num`),
+  UNIQUE KEY `학번_UNIQUE` (`user_num`),
+  UNIQUE KEY `nickname_UNIQUE` (`nickname`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
@@ -118,4 +290,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-02 21:59:07
+-- Dump completed on 2019-06-03 17:07:48
