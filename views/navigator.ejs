@@ -65,11 +65,10 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="category">한식</a>
-									<a class="dropdown-item" href="category">일식</a>
-									<a class="dropdown-item" href="category">중식</a>
-									<a class="dropdown-item" href="category">베트남</a>
-									<a class="dropdown-item" href="category">카페</a>
+								<% types.forEach(function(type){ %>
+               						<a class="dropdown-item" href="category"><%= type.type %></a>
+             					<% }) %>
+									
 								</div>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
@@ -88,9 +87,15 @@
 							<li class="nav-item">
 								<a class="nav-link login-button" href="/">치즈사이다</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link add-button" href="#"><i class="fa fa-plus-circle"></i> 리뷰 쓰기</a>
-							</li>
+							<div class="nav-item">
+							<select>
+								<% locations.forEach(function(location){ %>
+									<option value=<%= location.idlocation %>><%= location.loc_name %></option>
+								<% }) %>
+							</select>
+							</div>
+
+							
 						</ul>
 					</div>
 				</nav>

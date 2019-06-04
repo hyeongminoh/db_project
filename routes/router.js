@@ -9,8 +9,28 @@ module.exports = function(app){
 
 	/* GET home page. */
 	app.get('/', function(req, res, next) {
-  		res.render('index');
-	});
+       
+        connection.query('SELECT  type FROM menu_type',  (err, results) => {
+        	if (err){
+          		console.log(err);
+          		res.render('error');
+     	 	}
+     		types = results;
+      		connection.query('SELECT * FROM location',  (err, results) => {
+        		if (err){
+          			console.log(err);
+          			res.render('error');
+      			}
+      			locations = results;
+      			console.log(locations);
+      			res.render('index', {
+            		'types' : types,
+            		'locations': locations
+            		
+      			});
+    		});
+  		});
+    });
 
 	app.get('/dashboard', function(req, res, next){
 		res.render('dashboard');
@@ -24,9 +44,30 @@ module.exports = function(app){
 		res.render('single');
   	});
 
-  	app.get('/category', function(req, res, next) {
-		res.render('category');
-  	});
+	app.get('/category', function(req, res, next) {
+       
+        connection.query('SELECT  type FROM menu_type',  (err, results) => {
+        	if (err){
+          		console.log(err);
+          		res.render('error');
+     	 	}
+     		types = results;
+      		connection.query('SELECT * FROM location',  (err, results) => {
+        		if (err){
+          			console.log(err);
+          			res.render('error');
+      			}
+      			locations = results;
+      			console.log(locations);
+      			res.render('category', {
+            		'types' : types,
+            		'locations': locations
+            		
+      			});
+    		});
+  		});
+    });
+
 
 
   	app.get('/user', function(req, res, next) {
