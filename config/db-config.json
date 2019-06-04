@@ -1,7 +1,7 @@
 {
 	"host": "localhost",
 	"user": "root",
-	"password": null,
+	"password": "password123",
   	"host" : 3306,
-	"database": "db_project"
+	"database": "DBProject"
 }

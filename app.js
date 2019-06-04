@@ -7,7 +7,7 @@ const logger = require('morgan');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-const db = require('./db.js');
+// const db = require('./db.js');
 const app = express();
 
 // view engine setup
@@ -27,6 +27,14 @@ app.use(express.static('public'));
 const router = require('./routes/router.js')(app);
 const restaurant = require('./routes/restaurant.js')(app);
 
+connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'password123',
+  port     : 3306,
+  database : 'db_project',
+  database : 'DBProject',
+});
 
 //for pretty print
 app.locals.pretty = true;
