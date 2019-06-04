@@ -36,13 +36,11 @@ module.exports = function(app){
 		res.render('dashboard');
 	});
 
-	app.get('/single-blog', function(req, res, next){
-		res.render('single-blog');
+
+	app.get('/error', function(req, res, next){
+		res.render('error');
 	});
 
-	app.get('/single', function(req, res, next) {
-		res.render('single');
-  	});
 
 	app.get('/category', function(req, res, next) {
        
@@ -74,36 +72,44 @@ module.exports = function(app){
 		res.render('user-profile');
   	});
 
-  	app.post('/do_search', function (req, res) {
-  
-   		var body = req.body;
+
+  	app.post('/do_search_restaurant', function(req, res, next) {
+       
+       	var body = req.body;
    		var searchword = body.searchword;
    		let resultitems = [];
-   		db.query('SELECT cat_id, cat_name FROM category', (err, results) => {
-            if (err){
-               console.log(err);
-               res.render('error');
-            }
-   			categorys = results;
-   
-   		db.query('SELECT * FROM item WHERE item_name LIKE ? OR item_content LIKE ?', ['%' + searchword +'%','%' + searchword +'%'], function(error,results){
-      		if(error){
-         		console.log('검색 실패');
-      		}else{
-         		//let search_result = results;
-         		console.log('검색 완료. result: ', results);
-      		}
+        connection.query('SELECT  type FROM menu_type',  (err, results) => {
+        	if (err){
+          		console.log(err);
+          		res.render('error');
+     	 	}
+     		types = results;
 
-      		var temp = {"cat_name": searchword +  " 검색 결과"}
-      		console.log(temp);
-      		res.render('shop', {
-            	'categorys' : categorys,
-            	session : sess,
-            	'items' : results,
-            	'currentcategory': temp
-      		});
-   		});
-		});
-	});
+     		connection.query('SELECT * FROM restaurant WHERE r_name LIKE ? ', ['%' + searchword +'%'], (err, search_results) => {
+     			if(error){
+         			console.log('검색 실패');
+      			}else{
+         		//let search_result = results;
+         			console.log('검색 완료. result: ', search_results);
+      			}
+
+      			connection.query('SELECT * FROM location',  (err, results) => {
+        			if (err){
+          				console.log(err);
+          				res.render('error');
+      				}
+      				locations = results;
+      				
+      				res.render('search', {
+            			'types' : types,
+            			'locations': locations,
+            			'items' : search_results
+      				});
+    			});
+
+    		});
+  		});
+    });
+
 
 }
