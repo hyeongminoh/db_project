@@ -74,4 +74,36 @@ module.exports = function(app){
 		res.render('user-profile');
   	});
 
+  	app.post('/do_search', function (req, res) {
+  
+   		var body = req.body;
+   		var searchword = body.searchword;
+   		let resultitems = [];
+   		db.query('SELECT cat_id, cat_name FROM category', (err, results) => {
+            if (err){
+               console.log(err);
+               res.render('error');
+            }
+   			categorys = results;
+   
+   		db.query('SELECT * FROM item WHERE item_name LIKE ? OR item_content LIKE ?', ['%' + searchword +'%','%' + searchword +'%'], function(error,results){
+      		if(error){
+         		console.log('검색 실패');
+      		}else{
+         		//let search_result = results;
+         		console.log('검색 완료. result: ', results);
+      		}
+
+      		var temp = {"cat_name": searchword +  " 검색 결과"}
+      		console.log(temp);
+      		res.render('shop', {
+            	'categorys' : categorys,
+            	session : sess,
+            	'items' : results,
+            	'currentcategory': temp
+      		});
+   		});
+		});
+	});
+
 }
