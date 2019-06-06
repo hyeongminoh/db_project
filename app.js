@@ -31,7 +31,7 @@ connection = mysql.createConnection({
   "host": "localhost",
   "user": "root",
   "password": null,
-    "host" : 3306,
+  "host" : 3306,
   "database": "db_project"
 });
 

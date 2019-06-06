@@ -56,7 +56,6 @@ module.exports = function(app){
           			res.render('error');
       			}
       			locations = results;
-      			console.log(locations);
       			res.render('category', {
             		'types' : types,
             		'locations': locations
@@ -73,43 +72,49 @@ module.exports = function(app){
   	});
 
 
-  	app.post('/do_search_restaurant', function(req, res, next) {
-       
-       	var body = req.body;
+  	app.post('/do_search', function(req, res, next) {
+
+  		var body = req.body;
    		var searchword = body.searchword;
-   		let resultitems = [];
+   		console.log(searchword);
+   		var locatons;
+       	var types;
         connection.query('SELECT  type FROM menu_type',  (err, results) => {
         	if (err){
           		console.log(err);
           		res.render('error');
      	 	}
      		types = results;
-
-     		connection.query('SELECT * FROM restaurant WHERE r_name LIKE ? ', ['%' + searchword +'%'], (err, search_results) => {
-     			if(error){
-         			console.log('검색 실패');
-      			}else{
-         		//let search_result = results;
-         			console.log('검색 완료. result: ', search_results);
+      		connection.query('SELECT * FROM location',  (err, results) => {
+        		if (err){
+          			console.log(err);
+          			res.render('error');
+      			}
+      			locations = results;
+      			connection.query('SELECT * FROM restaurant WHERE r_name LIKE ?', ['%' + searchword +'%'],  (err, results) => {
+        		if (err){
+          			console.log(err);
+          			res.render('error');
       			}
 
-      			connection.query('SELECT * FROM location',  (err, results) => {
-        			if (err){
-          				console.log(err);
-          				res.render('error');
-      				}
-      				locations = results;
-      				
-      				res.render('search', {
-            			'types' : types,
-            			'locations': locations,
-            			'items' : search_results
-      				});
-    			});
+      			console.log(types);
+      			console.log(locations);
+      			console.log(results);
+      			
+      			res.render('search', {
+            		'types' : types,
+            		'locations': locations,
+            		'search_results': results,
+            		'searchword': searchword
+      			});
 
-    		});
-  		});
+    			});
+  			});
+    	});
     });
+
+
+  	
 
 
 }
