@@ -15,7 +15,7 @@ p, li, input, select, button {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Muli", sans-serif;
   font-weight: 600;
-  color: #333;
+  color: #f8f9fa  ;
 }
 
 p {
@@ -555,7 +555,7 @@ button {
 }
 
 .page-title h3 {
-  color: #fff;
+  color: #f8f9fa;
   font-size: 20px;
   letter-spacing: 0;
   line-height: 1;
@@ -2157,7 +2157,7 @@ article .image, article .video, article .post-slider {
 }
 
 article img {
-  width: 100%;
+  width: 60%;
   border-radius: 3px;
 }
 
@@ -2248,7 +2248,7 @@ article ul li a {
 
 article p {
   line-height: 26px;
-  color: #848484;
+  color: ##000000;
   margin-bottom: 24px;
 }
 
@@ -2379,7 +2379,7 @@ article.single-post p {
   padding-right: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
   .footer .block:last-child {
     margin-bottom: 30px;
   }

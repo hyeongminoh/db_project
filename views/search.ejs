@@ -26,7 +26,7 @@
 	<h4 class="widget-header">메뉴</h4>
 	<ul class="category-list">
 		<% types.forEach(function(type){ %>
-		<li><a href="category"><%= type.type %></a></li>
+		<li><a href="/category/<%= type.idmenu_type %>"><%= type.type %></a></li>
         <% }) %>
 	</ul>
 </div>
