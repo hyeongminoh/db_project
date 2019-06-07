@@ -28,11 +28,11 @@ const router = require('./routes/router.js')(app);
 const restaurant = require('./routes/restaurant.js')(app);
 
 connection = mysql.createConnection({
-  "host": "localhost",
-  "user": "root",
-  "password": null,
-    "host" : 3306,
-  "database": "db_project"
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  port     : 3306,
+  database : 'DBProject',
 });
 
 //for pretty print

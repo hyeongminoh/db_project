@@ -39,28 +39,21 @@
 				</div>
 				<!-- Advance Search -->
 				<div class="advance-search">
-					<form action="#">
+					<form action="/do_search" method = "post">
 						<div class="row">
 							<!-- Store Search -->
-							<form action="/do_search_restaurant" method = "post">
 							<div class="col-lg-6 col-md-12">
-								<div class="block d-flex">
-									<input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" name = "searchword" placeholder="식당을 입력하세요!">
+								<div class="block d-flex text-center">
+									<input type="search" class="form-control mb-2 mr-sm-2 mb-sm-0 text-center" id="search" name = "searchword" >
 									<!-- Search Button -->
 									<button type="submit"  class="btn btn-main">검색</button>
 								</div>
+
 							</div>
-							</form>
-							<div class="col-lg-6 col-md-12">
-								<div class="block d-flex">
-									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="해쉬태그를 입력하세요">
-									<!-- Search Button -->
-									<button class="btn btn-main" value="Submit" >검색</button>
-								</div>
-							</div>
+
 						</div>
-					
-					
+					</form>
+
 				</div>
 				
 			</div>
@@ -238,6 +231,3 @@
 </body>
 
 </html>
-
-
-
