@@ -23,12 +23,21 @@ module.exports = function(app){
           			res.render('error');
       			}
       			locations = results;
-      			console.log(locations);
-      			res.render('index', {
+      			connection.query('SELECT * FROM restaurant r, location l WHERE r.idlocation=l.idlocation',  (err, results) => {
+
+
+      				console.log(results);
+      				console.log(locations);
+      				res.render('index', {
             		'types' : types,
-            		'locations': locations
-            		
+            		'locations': locations,
+            		'restaurants': results
+
+            		});
+
+
       			});
+
     		});
   		});
     });

@@ -27,6 +27,7 @@ h1 {
 }
 
 h2 {
+  color: #343a40  ;
   font-size: 25px;
 }
 
@@ -2379,7 +2380,7 @@ article.single-post p {
   padding-right: 10px;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 768px) {
   .footer .block:last-child {
     margin-bottom: 30px;
   }
