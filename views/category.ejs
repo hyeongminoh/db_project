@@ -8,7 +8,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- Advance Search -->
-				
+				<div class="col-md-12 text-center">
+				<!-- Title text -->	
+			</div>
 			</div>
 		</div>
 	</div>
@@ -23,7 +25,7 @@
 	<h4 class="widget-header">메뉴</h4>
 	<ul class="category-list">
 		<% types.forEach(function(type){ %>
-		<li><a href="category"><%= type.type %></a></li>
+		<li><a href="/category/<%= type.idmenu_type %>"><%= type.type %></a></li>
         <% }) %>
 	</ul>
 </div>
@@ -70,6 +72,7 @@
 				</div>
 				<div class="product-grid-list">
 					<div class="row mt-30">
+					<% restaurants.forEach(function(item){ %>
 						<div class="col-sm-12 col-lg-4 col-md-6">
 							<!-- product card -->
 <div class="product-item bg-light">
@@ -77,11 +80,11 @@
 		<div class="thumb-content">
 			<!-- <div class="price">$200</div> -->
 			<a href="/Restaurant/2">
-				<img class="card-img-top img-fluid" src="images/restaurant/호식당.jpg" alt="Card image cap">
+				<img class="card-img-top img-fluid" src="/images/restaurant/<%= item.r_name %>.jpg" alt="Card image cap">
 			</a>
 		</div>
 		<div class="card-body">
-		    <h4 class="card-title"><a href="/restaurant/2">호식당</a></h4>
+		    <h4 class="card-title"><a href="/Restaurant/<%= item.idrestaurant %>"><%= item.r_name %></a></h4>
 		    <ul class="list-inline product-meta">
 		    	
 		    </ul>
@@ -99,174 +102,10 @@
 	</div>
 </div>
 
-
-
 						</div>
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-<div class="product-item bg-light">
-	<div class="card">
-		<div class="thumb-content">
-			<!-- <div class="price">$200</div> -->
-			<a href="/restaurant/3">
-				<img class="card-img-top img-fluid" src="images/restaurant/키와미루아지.jpg" alt="Card image cap">
-			</a>
-		</div>
-		<div class="card-body">
-		    <h4 class="card-title"><a href="/restaurant/3">키와미루아지</a></h4>
-		    <ul class="list-inline product-meta">
-		    	
-		    </ul>
-		    
-		    <div class="product-ratings">
-		    	<ul class="list-inline">
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
-		    	</ul>
-		    </div>
-		</div>
-	</div>
-</div>
+					<% }) %>
 
-
-
-						</div>
 						
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-<div class="product-item bg-light">
-	<div class="card">
-		<div class="thumb-content">
-			<!-- <div class="price">$200</div> -->
-			<a href="">
-				<img class="card-img-top img-fluid" src="images/restaurant/온나무샤멘.jpg" alt="Card image cap">
-			</a>
-		</div>
-		<div class="card-body">
-		    <h4 class="card-title"><a href="">온나무샤멘</a></h4>
-		    <ul class="list-inline product-meta">
-		    	
-		    </ul>
-		    
-		    <div class="product-ratings">
-		    	<ul class="list-inline">
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item"><i class="fa fa-star"></i></li>	
-		    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
-		    	</ul>
-		    </div>
-		</div>
-	</div>
-</div>
-
-
-
-						</div>
-
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-<div class="product-item bg-light">
-	<div class="card">
-		<div class="thumb-content">
-			<!-- <div class="price">$200</div> -->
-			<a href="">
-				<img class="card-img-top img-fluid" src="images/restaurant/하코야.jpg" alt="Card image cap">
-			</a>
-		</div>
-		<div class="card-body">
-		    <h4 class="card-title"><a href="">하코야</a></h4>
-		    <ul class="list-inline product-meta">
-		    	
-		    </ul>
-		    
-		    <div class="product-ratings">
-		    	<ul class="list-inline">
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
-		    	</ul>
-		    </div>
-		</div>
-	</div>
-</div>
-
-
-
-						</div>
-
-												<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-<div class="product-item bg-light">
-	<div class="card">
-		<div class="thumb-content">
-			<!-- <div class="price">$200</div> -->
-			<a href="">
-				<img class="card-img-top img-fluid" src="images/restaurant/작은집.jpg" alt="Card image cap">
-			</a>
-		</div>
-		<div class="card-body">
-		    <h4 class="card-title"><a href="">작은집	</a></h4>
-		    <ul class="list-inline product-meta">
-		    	
-		    </ul>
-		    
-		    <div class="product-ratings">
-		    	<ul class="list-inline">
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
-		    	</ul>
-		    </div>
-		</div>
-	</div>
-</div>
-
-
-
-						</div>
-
-
-						<div class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
-<div class="product-item bg-light">
-	<div class="card">
-		<div class="thumb-content">
-			<!-- <div class="price">$200</div> -->
-			<a href="">
-				<img class="card-img-top img-fluid" src="images/restaurant/초밥쟁이.jpg" alt="Card image cap">
-			</a>
-		</div>
-		<div class="card-body">
-		    <h4 class="card-title"><a href="">초밥쟁이</a></h4>
-		    <ul class="list-inline product-meta">
-		    	
-		    </ul>
-		    
-		    <div class="product-ratings">
-		    	<ul class="list-inline">
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item selected"><i class="fa fa-star"></i></li>
-		    		<li class="list-inline-item"><i class="fa fa-star"></i></li>
-		    	</ul>
-		    </div>
-		</div>
-	</div>
-</div>
-
-
-
-						</div>
 
 
 						</div>

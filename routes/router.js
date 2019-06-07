@@ -10,12 +10,13 @@ module.exports = function(app){
 	/* GET home page. */
 	app.get('/', function(req, res, next) {
        
-        connection.query('SELECT  type FROM menu_type',  (err, results) => {
+        connection.query('SELECT * FROM menu_type',  (err, results) => {
         	if (err){
           		console.log(err);
           		res.render('error');
      	 	}
      		types = results;
+     		console.log(types);
       		connection.query('SELECT * FROM location',  (err, results) => {
         		if (err){
           			console.log(err);
@@ -42,9 +43,14 @@ module.exports = function(app){
 	});
 
 
-	app.get('/category', function(req, res, next) {
-       
-        connection.query('SELECT  type FROM menu_type',  (err, results) => {
+	app.get('/category/:categoryid', function(req, res, next) {
+
+  		var body = req.body;
+   		var searchword = body.searchword;
+   		console.log(searchword);
+   		var locatons;
+       	var types;
+        connection.query('SELECT * FROM menu_type',  (err, results) => {
         	if (err){
           		console.log(err);
           		res.render('error');
@@ -56,15 +62,24 @@ module.exports = function(app){
           			res.render('error');
       			}
       			locations = results;
+      			connection.query('SELECT * FROM restaurant WHERE idmenu_type LIKE ?', [req.params.categoryid],  (err, results) => {
+        		if (err){
+          			console.log(err);
+          			res.render('error');
+      			}
+
+      			console.log(results);
+      			
       			res.render('category', {
             		'types' : types,
-            		'locations': locations
-            		
+            		'locations': locations,
+            		'restaurants': results,
       			});
-    		});
-  		});
-    });
 
+    			});
+  			});
+    	});
+    });
 
 
   	app.get('/user', function(req, res, next) {
@@ -79,7 +94,7 @@ module.exports = function(app){
    		console.log(searchword);
    		var locatons;
        	var types;
-        connection.query('SELECT  type FROM menu_type',  (err, results) => {
+        connection.query('SELECT * FROM menu_type',  (err, results) => {
         	if (err){
           		console.log(err);
           		res.render('error');
