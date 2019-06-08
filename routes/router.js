@@ -23,18 +23,31 @@ module.exports = function (app) {
                 }
                 locations = results;
                 connection.query('SELECT * FROM restaurant r, location l WHERE r.idlocation=l.idlocation', (err, results) => {
-
-
-                    console.log(results);
-                    console.log(locations);
-                    res.render('index', {
-                        'types': types,
-                        'locations': locations,
-                        'restaurants': results
-
-                    });
-
-
+                    restaurant = results
+                    connection.query('SELECT count(*) "reviewcnt"  ,idrestaurant FROM review group by idrestaurant limit 3', (err, results) => {
+                        top_res = results
+                        selected_res = []
+                        count = 0
+                        console.log(top_res.length)
+                        for(var i =0; i<top_res.length; i++){
+                            console.log(i,":",top_res[i].idrestaurant)
+                            connection.query('SELECT * FROM restaurant where idrestaurant = ?',top_res[i].idrestaurant, (err, results) => {
+                                selected_res.push(results[0])
+                                count ++
+                                if(count == top_res.length){
+                                    console.log(selected_res)
+                                    console.log(locations);
+                                    res.render('index', {
+                                        'types': types,
+                                        'locations': locations,
+                                        'restaurants': restaurant,
+                                        'selected' : selected_res
+                                    });
+                                }
+                            });
+                        }
+                        
+                });
                 });
 
             });
