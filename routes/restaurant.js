@@ -10,11 +10,11 @@ module.exports = function(app){
 	app.get('/restaurant/:restaurantid', function(req, res, next) {
         var sqlquery =  "SELECT  * FROM restaurant WHERE idrestaurant=?";
         console.log("restaurantid:",req.params.restaurantid)
-        var name,location,time,menu_type,reservation,phone,id_menu_type, idlocation,walk_time
+        var name,location,time,menu_type,reservation,phone,id_menu_type, idlocation,walk_time,image
         var menu = []
         var types;
         var locatons;
-        connection.query('SELECT  type FROM menu_type',  (err, results) => {
+        connection.query('SELECT * FROM menu_type',  (err, results) => {
         	if (err){
           		console.log(err);
           		res.render('error');
@@ -35,6 +35,7 @@ module.exports = function(app){
                         reservation = row[0].reservation
                         phone = row[0].phone
                         idlocation = row[0].idlocation
+                        image = row[0].image
                         var sqlquery =  "SELECT  * FROM menu_type WHERE idmenu_type=?";
                         connection.query(sqlquery, id_menu_type, function (err, row) {
                             if(!err){
@@ -58,7 +59,8 @@ module.exports = function(app){
                                             menu_type: menu_type,
                                             reservation : reservation,
                                             phone : phone,
-                                            walk_time : walk_time
+                                            walk_time : walk_time,
+                                            image : image
                                         }
                                         console.log(info)
                                         console.log(menu)

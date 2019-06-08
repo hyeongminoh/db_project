@@ -32,7 +32,7 @@ connection = mysql.createConnection({
   user     : 'root',
   password : '',
   port     : 3306,
-  database : 'db_project',
+  database : 'DBProject',
 });
 
 //for pretty print
