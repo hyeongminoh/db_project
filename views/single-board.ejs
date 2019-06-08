@@ -1,0 +1,141 @@
+<% include ./navigator.ejs %>
+
+<!--=================================
+=            Single Blog            =
+==================================-->
+<section class="blog single-board section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+				<article class="single-post">
+					<h3><strong>같이 점심 드실 분 구해요!!</strong></h3>
+					<ul class="list-inline">
+						<li class="list-inline-item">by <a href="">치즈사이다</a></li>
+						<li class="list-inline-item">6/3 10:35</li>
+					</ul>
+					<p><strong>정건에서 12시에 만나서 점심 드실 분 구합니다~</strong></p>
+					<ul class="social-circle-icons list-inline">
+				  		<li class="list-inline-item text-center"><a class="fa fa-facebook" href=""></a></li>
+				  		<li class="list-inline-item text-center"><a class="fa fa-twitter" href=""></a></li>
+				  		<li class="list-inline-item text-center"><a class="fa fa-google-plus" href=""></a></li>
+				  		<li class="list-inline-item text-center"><a class="fa fa-pinterest-p" href=""></a></li>
+				  		<li class="list-inline-item text-center"><a class="fa fa-linkedin" href=""></a></li>
+				  	</ul>
+				</article>
+
+				<div class="block comment">
+					<table class="table table-responsive product-dashboard-table">
+						<thead>
+						<tr>
+							<th class="text-center" td width=380 style="word-break:break-all">댓글</th>
+							<th class="text-center">닉네임</th>
+							<th class="text-center"td width=250 style="word-break:break-all">time</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+						<td class="product-details">
+							<a class="title" href="single-board">저요저요!!!!!!!!!!!</a></td>
+						<td class="product-category"><span class="categories">굶주린대학생</span></td>
+						<td class="text-center"><span class="add-id">6/3 10:40</span></td>
+						</tr>
+
+						<tr>
+							<td class="product-details">
+								<a class="title" href="single-board">와 맛있겠다ㅠㅠ저도 가고 싶어요</a></td>
+							<td class="product-category"><span class="categories">닉네임뭘로해</span></td>
+							<td class="text-center"><span class="add-id">6/3 10:38</span></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="block comment">
+					<h4>댓글 쓰기</h4>
+					<form action="#">
+						<!-- Message -->
+
+						<div class="form-group mb-30">
+						    <label for="message">내용</label>
+						    <textarea class="form-control" id="message" rows="8"></textarea>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-md-6">
+								<!-- Name -->
+								<div class="form-group mb-30">
+								    <label for="name">닉네임</label>
+								    <input type="text" class="form-control" id="name">
+								</div>
+							</div>
+
+						</div>
+						<button class="btn btn-transparent">작성 완료</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-md-10 offset-md-1 col-lg-3 offset-lg-0">
+				<div class="sidebar">
+					<!-- Search Widget -->
+					<div class="widget search p-0">
+						<div class="input-group">
+						    <input type="text" class="form-control" id="expire" placeholder="Search...">
+						    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+					    </div>
+					</div>
+					<!-- Category Widget -->
+					<div class="widget category">
+						<!-- Widget Header -->
+						<h5 class="widget-header">#해쉬태그 검색</h5>
+						<ul class="category-list">
+							<li><a href="">맛집 <span class="float-right">(9)</span></a></li>
+							<li><a href="">가성비 <span class="float-right">(5)</span></a></li>
+							<li><a href="">분위기 좋은<span class="float-right">(7)</span></a></li>
+							<li><a href="">국물 요리<span class="float-right">(3)</span></a></li>
+							<li><a href="">총알배달<span class="float-right">(2)</span></a></li>
+						</ul>
+					</div>
+
+					<!-- Archive Widget -->
+					<div class="widget archive">
+						<!-- Widget Header -->
+						<h5 class="widget-header">인기 리뷰</h5>
+						<ul class="archive-list">
+							<li><a href="">리뷰1<span class="float-right">좋아요(56)</span></a></li>
+							<li><a href="">리뷰2<span class="float-right">좋아요(47)</span></a></li>
+							<li><a href="">리뷰3<span class="float-right">좋아요(43)</span></a></li>
+							<li><a href="">리뷰4<span class="float-right">좋아요(35)</span></a></li>
+							<li><a href="">리뷰5<span class="float-right">좋아요(31)</span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--============================
+=            Footer            =
+=============================-->
+<% include ./footer.ejs %>
+
+
+
+<!-- JAVASCRIPTS -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="plugins/tether/js/tether.min.js"></script>
+<script src="plugins/raty/jquery.raty-fa.js"></script>
+<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script src="plugins/slick-carousel/slick/slick.min.js"></script>
+<script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+<script src="js/scripts.js"></script>
+
+</body>
+
+</html>
+

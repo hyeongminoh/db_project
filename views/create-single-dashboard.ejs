@@ -1,0 +1,62 @@
+<% include ./navigator.ejs %>
+
+<!--=================================
+=        Create Single Blog         =
+==================================-->
+<section class="blog single-board section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
+                <div class="block comment">
+                    <h4><strong>글 쓰기</strong></h4>
+                    <form action="/dashboard">
+                        <!-- Message -->
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <!-- Name -->
+                                <div class="form-group mb-30">
+                                    <label for="name">제목</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group mb-30">
+                            <label for="message">내용</label>
+                            <textarea class="form-control" id="message" rows="8"></textarea>
+                        </div>
+
+                        <button class="btn btn-transparent">작성 완료</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--============================
+=            Footer            =
+=============================-->
+<% include ./footer.ejs %>
+
+
+<!-- JAVASCRIPTS -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="plugins/tether/js/tether.min.js"></script>
+<script src="plugins/raty/jquery.raty-fa.js"></script>
+<script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+<script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script src="plugins/slick-carousel/slick/slick.min.js"></script>
+<script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+<script src="js/scripts.js"></script>
+
+</body>
+
+</html>
