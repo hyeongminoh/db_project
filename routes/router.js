@@ -70,26 +70,25 @@ module.exports = function (app) {
                 }
                 locations = results;
 
-                connection.query('SELECT * FROM group_post', (err, results) => {
+                connection.query('SELECT * FROM group_post gp, user u WHERE gp.user_num=u.user_num ORDER BY post_time ASC', (err, results) => {
                     if (err) {
                         console.log(err);
                         res.render('error');
                     }
                     posts = results;
-                    console.log(results);
-                    connection.query('SELECT * FROM group_reply', (err, results) => {
+                    console.log(posts);
+                    connection.query('SELECT count(*) FROM group_post gp, group_reply gr WHERE gp.idgroup_post=gr.idgroup_post', (err, results) => {
                         if (err) {
                             console.log(err);
                             res.render('error');
                         }
-                        connection.query('SELECT * FROM group_post gp, group_reply gr WHERE gp.idgroup_post=gr.idgroup_post', (err, results) => {
-                            console.log(results);
-                            res.render('dashboard', {
+                        console.log(results);
+                        res.render('dashboard', {
                                 'types': types,
-                                'posts': results,
-                                'restaurants': results
-                            });
+                                'posts': posts,
+                                'reply_num': results
                         });
+                    
                     });
                 });
             });
@@ -118,12 +117,13 @@ module.exports = function (app) {
                         res.render('error');
                     }
                     posts = results;
-                    console.log(results);
+                    console.log(posts);
                     connection.query('SELECT * FROM group_reply', (err, results) => {
                         if (err) {
                             console.log(err);
                             res.render('error');
                         }
+
                         connection.query('SELECT * FROM group_post gp, group_reply gr WHERE gp.idgroup_post=gr.idgroup_post', (err, results) => {
                             console.log(results);
                             res.render('single-board', {

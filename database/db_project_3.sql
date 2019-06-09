@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- 생성 시간: 19-06-09 06:12
+-- 생성 시간: 19-06-09 06:57
 -- 서버 버전: 10.1.40-MariaDB
 -- PHP 버전: 7.1.29
 
@@ -41,8 +41,8 @@ CREATE TABLE `group_post` (
 --
 
 INSERT INTO `group_post` (`idgroup_post`, `user_num`, `title`, `content`, `post_time`) VALUES
-(1, 1, '자대에서 같이 배달 시키실 분?', 'ㅈㄱㄴ 난 컴공동방임', '2019-06-09 04:10:56'),
-(2, 0, '우정원인데 배달 같이 할 사람?', '떡볶이나 피자 궈궈', '2019-06-09 04:10:56');
+(1, 0, '자대에서 같이 배달 시키실 분?', 'ㅈㄱㄴ 난 컴공동방임', '2019-06-09 04:10:56'),
+(2, 1, '정건에서 고기 구워먹을분', '고기먹고싶', '2019-06-09 04:20:12');
 
 -- --------------------------------------------------------
 
@@ -57,6 +57,14 @@ CREATE TABLE `group_reply` (
   `content` varchar(255) NOT NULL,
   `reply_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 테이블의 덤프 데이터 `group_reply`
+--
+
+INSERT INTO `group_reply` (`idgroup_reply`, `idgroup_post`, `user_num`, `content`, `reply_time`) VALUES
+(1, 1, 1, '저요~', '2019-06-09 04:41:59'),
+(2, 7, 0, '오 고기 고', '2019-06-09 04:42:33');
 
 -- --------------------------------------------------------
 
@@ -534,8 +542,7 @@ INSERT INTO `user` (`user_num`, `pw`, `user_name`, `birth`, `nickname`) VALUES
 -- 테이블의 인덱스 `group_post`
 --
 ALTER TABLE `group_post`
-  ADD PRIMARY KEY (`idgroup_post`),
-  ADD UNIQUE KEY `user_num_UNIQUE` (`user_num`);
+  ADD PRIMARY KEY (`idgroup_post`);
 
 --
 -- 테이블의 인덱스 `group_reply`
@@ -606,13 +613,13 @@ ALTER TABLE `user`
 -- 테이블의 AUTO_INCREMENT `group_post`
 --
 ALTER TABLE `group_post`
-  MODIFY `idgroup_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idgroup_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- 테이블의 AUTO_INCREMENT `group_reply`
 --
 ALTER TABLE `group_reply`
-  MODIFY `idgroup_reply` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idgroup_reply` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 테이블의 AUTO_INCREMENT `hashtag`

@@ -34,16 +34,18 @@
                         </tr>
                         </thead>
                         <tbody>
+
+
+                        <% posts.forEach(function(post){ %>
                         <tr>
                             <td class="text-center" td width=150 style="word-break:break-all"><span
-                                        class="align-bottom">1</span></td>
+                                        class="align-bottom"><%= post.idgroup_post %></span></td>
                             <td class="product-details">
-                                <a class="title" href="/single-board"><strong>같이 점심 드실 분 구해요!!</strong></a>
-                                <span class="add-id">정건에서 12시에 만나서 점심 드실 분 구합니다~</span>
-                                <span class="add-id"><strong>장소:</strong>학교 정문 건너</span>
-                                <span class="add-id"><strong>시간:</strong>5월29일 11:30</span>
+                                <a class="title" href="/single-board"><strong><%= post.title %></strong></a>
+                                <span class="add-id"><%= post.content %></span>
+                                <span class="add-id"><strong>시간:</strong><%= post.post_time %></span>
                             </td>
-                            <td class="product-category"><span class="categories">치즈사이다
+                            <td class="product-category"><span class="categories"><%= post.nickname %>
 								<span class="action" data-title="Action">
 									<div class="">
 										<ul class="list-inline justify-content-center">
@@ -70,127 +72,11 @@
                             </td>
                             <td class="text-center" td width=100 style="word-break:break-all"><span
                                         class="align-bottom">2</span></td>
-                            <td class="product-category"><span class="add-id">5/29 10:35</span></td>
+                            <td class="product-category"><span class="add-id"><%= post.post_time %></span></td>
                         </tr>
-                        <tr>
-                            <td class="text-center"><span class="align-bottom">2</span></td>
-                            <td class="product-details">
-                                <h3 class="title"><strong>아직 식사 안 하신 분 있나요?</strong></h3>
-                                <span class="add-id">이따가 정건 앞 정류장에서 만나서 같이 식사할 사람 구합니다~</span>
-                                <span class="add-id"><strong>장소:</strong>학교 정문 건너</span>
-                                <span class="add-id"><strong>시간:</strong>5월30일 14:00</span>
-                            </td>
-                            <td class="product-category"><span class="categories">배고팡
-								<span class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-                                                   class="view" href="">
-													<i class="fa fa-eye"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</span>
-								</span>
-                            </td>
-                            <td class="text-center"><span class="align-bottom">1</span></td>
-                            <td class="product-category"><span class="add-id">5/30 13:47</span></td>
-                        </tr>
+                        <% }) %>
 
-                        <tr>
-                            <td class="text-center"><span class="align-bottom">3</span></td>
-                            <td class="product-details">
-                                <h3 class="title"><strong>[영통 맛집 탐방대 모집합니다] </strong></h3>
-                                <span class="add-id"> 현재 12명 모집완료! 댓글로 카톡 아이디 남겨주세요~!</span>
-                                <span class="add-id"><strong>장소:</strong>영통 중심 상가</span>
-                                <span class="add-id"><strong>시간:</strong>5월30일 23:50</span>
-                            </td>
-                            <td class="product-category"><span class="categories">치즈사이다
-								<span class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-                                                   class="view" href="">
-													<i class="fa fa-eye"></i>
-												</a>
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil"></i>
-												</a>
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash"></i>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</span>
-								</span>
-                            </td>
-                            <td class="text-center"><span class="align-bottom">3</span></td>
-                            <td class="product-category"><span class="add-id">5/30 14:23</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center"><span class="align-bottom">4</span></td>
-                            <td class="product-details">
-                                <h3 class="title"><strong>★오늘 밤 10시 야식팟 모집★</strong></h3>
-                                <span class="add-id">치킨/피자/족발 중에 댓글로 남겨주세요. 학생회관에서 주문합니다!</span>
-                                <span class="add-id"><strong>장소:</strong>경희대</span>
-                                <span class="add-id"><strong>시간:</strong>6월1일 22:00</span>
-                            </td>
-                            <td class="product-category"><span class="categories">경희대생33
-								<span class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-                                                   class="view" href="">
-													<i class="fa fa-eye"></i>
-												</a>
-											</li>
-
-										</ul>
-									</div>
-								</span>
-								</span>
-                            </td>
-                            <td class="text-center"><span class="align-bottom">2</span></td>
-                            <td class="product-category"><span class="add-id">6/1 19:02</span></td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-center"><span class="align-bottom">5</span></td>
-                            <td class="product-details">
-                                <h3 class="title"><strong>도스마스 배달팟 구함@@@@@@@@@@@@</strong></h3>
-                                <span class="add-id">자대에서 도스마스 주문할 사람있나요</span>
-                                <span class="add-id"><strong>장소:</strong>경희대</span>
-                                <span class="add-id"><strong>시간:</strong>6월2일 12:00</span>
-                            </td>
-                            <td class="product-category"><span class="categories">자대지박령
-								<span class="action" data-title="Action">
-									<div class="">
-										<ul class="list-inline justify-content-center">
-											<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-                                                   class="view" href="">
-													<i class="fa fa-eye"></i>
-												</a>
-											</li>
-
-										</ul>
-									</div>
-								</span>
-								</span>
-                            </td>
-                            <td class="text-center"><span class="align-bottom">1</span></td>
-                            <td class="product-category"><span class="add-id">6/2 11:26</span></td>
-                        </tr>
+                        
 
 
 
