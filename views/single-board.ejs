@@ -8,44 +8,41 @@
 		<div class="row">
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 				<article class="single-post">
-					<h3><strong>같이 점심 드실 분 구해요!!</strong></h3>
+					<h3><strong><%= posts[0].title %></strong></h3>
 					<ul class="list-inline">
-						<li class="list-inline-item">by <a href="">치즈사이다</a></li>
-						<li class="list-inline-item">6/3 10:35</li>
+						<li class="list-inline-item">by <a href=""> <%= post_user[0].nickname %></a></li>
+						<li class="list-inline-item"> <%= posts[0].post_time %></li>
 					</ul>
-					<p><strong>정건에서 12시에 만나서 점심 드실 분 구합니다~</strong></p>
+					<p><strong><%= posts[0].content%></strong></p>
 					<ul class="social-circle-icons list-inline">
-				  		<li class="list-inline-item text-center"><a class="fa fa-facebook" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-twitter" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-google-plus" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-pinterest-p" href=""></a></li>
-				  		<li class="list-inline-item text-center"><a class="fa fa-linkedin" href=""></a></li>
-				  	</ul>
+						<li class="list-inline-item text-center"><a class="fa fa-facebook" href=""></a></li>
+						<li class="list-inline-item text-center"><a class="fa fa-twitter" href=""></a></li>
+						<li class="list-inline-item text-center"><a class="fa fa-google-plus" href=""></a></li>
+						<li class="list-inline-item text-center"><a class="fa fa-pinterest-p" href=""></a></li>
+						<li class="list-inline-item text-center"><a class="fa fa-linkedin" href=""></a></li>
+					</ul>
 				</article>
 
 				<div class="block comment">
 					<table class="table table-responsive product-dashboard-table">
 						<thead>
 						<tr>
-							<th class="text-center" td width=380 style="word-break:break-all">댓글</th>
-							<th class="text-center">닉네임</th>
-							<th class="text-center"td width=250 style="word-break:break-all">time</th>
+							<th class="text-center" td width=330 style="word-break:break-all">댓글</th>
+							<th class="text-center" td width=100 >닉네임</th>
+							<th class="text-center" td width=250 style="word-break:break-all">time</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr>
-						<td class="product-details">
-							<a class="title" href="single-board">저요저요!!!!!!!!!!!</a></td>
-						<td class="product-category"><span class="categories">굶주린대학생</span></td>
-						<td class="text-center"><span class="add-id">6/3 10:40</span></td>
-						</tr>
 
-						<tr>
-							<td class="product-details">
-								<a class="title" href="single-board">와 맛있겠다ㅠㅠ저도 가고 싶어요</a></td>
-							<td class="product-category"><span class="categories">닉네임뭘로해</span></td>
-							<td class="text-center"><span class="add-id">6/3 10:38</span></td>
-						</tr>
+						<% reply_user.forEach(function(reply_user){ %>
+							<tr>
+								<td class="text-center"><%= reply_user.content %></td>
+								<td class="text-center"><span class="categories"><%= reply_user.nickname%></span></td>
+								<td class="text-center"><span class="add-id"><%= reply_user.reply_time%></span></td>
+							</tr>
+
+						<% }) %>
+
 						</tbody>
 					</table>
 				</div>
@@ -56,15 +53,15 @@
 						<!-- Message -->
 
 						<div class="form-group mb-30">
-						    <label for="message">내용</label>
-						    <textarea class="form-control" id="message" rows="8"></textarea>
+							<label for="message">내용</label>
+							<textarea class="form-control" id="message" rows="8"></textarea>
 						</div>
 						<div class="row">
 							<div class="col-sm-12 col-md-6">
 								<!-- Name -->
 								<div class="form-group mb-30">
-								    <label for="name">닉네임</label>
-								    <input type="text" class="form-control" id="name">
+									<label for="name">닉네임</label>
+									<input type="text" class="form-control" id="name">
 								</div>
 							</div>
 
@@ -78,9 +75,9 @@
 					<!-- Search Widget -->
 					<div class="widget search p-0">
 						<div class="input-group">
-						    <input type="text" class="form-control" id="expire" placeholder="Search...">
-						    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-					    </div>
+							<input type="text" class="form-control" id="expire" placeholder="Search...">
+							<span class="input-group-addon"><i class="fa fa-search"></i></span>
+						</div>
 					</div>
 					<!-- Category Widget -->
 					<div class="widget category">
@@ -117,7 +114,6 @@
 =            Footer            =
 =============================-->
 <% include ./footer.ejs %>
-
 
 
 <!-- JAVASCRIPTS -->

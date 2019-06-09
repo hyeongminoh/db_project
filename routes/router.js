@@ -120,41 +120,43 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/single-board', function (req, res, next) {
-        var locatons;
-        var types;
+    app.get('/single-board/:idgroup_post', function (req, res, next) {
         connection.query('SELECT * FROM menu_type', (err, results) => {
             if (err) {
                 console.log(err);
                 res.render('error');
             }
             types = results;
+            console.log(types);
             connection.query('SELECT * FROM location', (err, results) => {
                 if (err) {
                     console.log(err);
                     res.render('error');
                 }
                 locations = results;
+                connection.query('SELECT * FROM restaurant r, location l WHERE r.idlocation=l.idlocation', (err, results) => {
+                    restaurant = results;
+                    connection.query('SELECT * FROM group_post WHERE idgroup_post LIKE ?', [req.params.idgroup_post], (err, results) => {
+                        posts = results;
+                        console.log(results[0].user_num);
+                        connection.query('SELECT * FROM user WHERE user_num LIKE ?', [posts[0].user_num], (err, results) => {
+                            post_user = results;
+                            connection.query('SELECT * FROM user u, group_reply gr WHERE u.user_num = gr.user_num AND gr.idgroup_post LIKE ?', [req.params.idgroup_post], (err, results) => {
+                                reply_user = results;
+                                if (err) {
+                                    console.log(err);
+                                    res.render('error');
+                                }
 
-                connection.query('SELECT * FROM group_post', (err, results) => {
-                    if (err) {
-                        console.log(err);
-                        res.render('error');
-                    }
-                    posts = results;
-                    console.log(posts);
-                    connection.query('SELECT * FROM group_reply', (err, results) => {
-                        if (err) {
-                            console.log(err);
-                            res.render('error');
-                        }
+                                res.render('single-board', {
+                                    'types': types,
+                                    'locations': locations,
+                                    'restaurants': restaurant,
+                                    'posts': posts,
+                                    'post_user': post_user,
+                                    'reply_user': reply_user,
 
-                        connection.query('SELECT * FROM group_post gp, group_reply gr WHERE gp.idgroup_post=gr.idgroup_post', (err, results) => {
-                            console.log(results);
-                            res.render('single-board', {
-                                'types': types,
-                                'posts': results,
-                                'restaurants': results
+                                });
                             });
                         });
                     });
@@ -162,6 +164,7 @@ module.exports = function (app) {
             });
         });
     });
+
 
     app.get('/create-single-dashboard', function (req, res, next) {
         var locatons;
