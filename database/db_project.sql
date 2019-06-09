@@ -55,8 +55,7 @@ CREATE TABLE `group_reply` (
   `user_num` int(11) NOT NULL,
   `content` varchar(255) NOT NULL,
   `reply_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idgroup_reply`),
-  UNIQUE KEY `user_num_UNIQUE` (`user_num`)
+  PRIMARY KEY (`idgroup_reply`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

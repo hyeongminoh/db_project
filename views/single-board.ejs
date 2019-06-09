@@ -48,24 +48,14 @@
 				</div>
 
 				<div class="block comment">
-					<h4>댓글 쓰기</h4>
-					<form action="#">
+					<b>댓글 쓰기</b>
+					<form action="/single-board/<%= posts[0].idgroup_post %>" method="POST">
 						<!-- Message -->
-
 						<div class="form-group mb-30">
-							<label for="message">내용</label>
-							<textarea class="form-control" id="message" rows="8"></textarea>
+							<label for="content">내용</label>
+							<input type="text" class="form-control" id="content" name="content">
 						</div>
-						<div class="row">
-							<div class="col-sm-12 col-md-6">
-								<!-- Name -->
-								<div class="form-group mb-30">
-									<label for="name">닉네임</label>
-									<input type="text" class="form-control" id="name">
-								</div>
-							</div>
 
-						</div>
 						<button class="btn btn-transparent">작성 완료</button>
 					</form>
 				</div>

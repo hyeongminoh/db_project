@@ -138,7 +138,7 @@ module.exports = function (app) {
                     restaurant = results;
                     connection.query('SELECT * FROM group_post WHERE idgroup_post LIKE ?', [req.params.idgroup_post], (err, results) => {
                         posts = results;
-                        console.log(results[0].user_num);
+                        console.log(posts);
                         connection.query('SELECT * FROM user WHERE user_num LIKE ?', [posts[0].user_num], (err, results) => {
                             post_user = results;
                             connection.query('SELECT * FROM user u, group_reply gr WHERE u.user_num = gr.user_num AND gr.idgroup_post LIKE ?', [req.params.idgroup_post], (err, results) => {
@@ -166,6 +166,28 @@ module.exports = function (app) {
         });
     });
 
+    app.post('/single-board/:idgroup_post', function (req, res, next) {
+        var body = req.body;
+        connection.query('SELECT COUNT(*) as gr FROM group_reply ', (err, results) => {
+            if (err) {
+                console.log(err);
+                res.render('error');
+            }
+            reply_count = results;
+
+            var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+            connection.query('INSERT INTO group_reply(idgroup_reply, idgroup_post, user_num, content, reply_time) values (?,?,?,?,?)', [reply_count[0].gr + 1, req.params.idgroup_post, 0, body.content, new Date(Date.now() - tzoffset).toISOString().slice(0, 19).replace('T', ' ')], (err, results) => {
+                if (err) {
+                    console.log(err);
+                    res.render('error');
+                }
+                console.log(results);
+                res.redirect('/single-board/'+req.params.idgroup_post);
+            });
+
+        });
+    });
+
     app.post('/create-single-dashboard', function (req, res, next) {
         var body = req.body;
         connection.query('SELECT COUNT(*) as gp FROM group_post', (err, results) => {
@@ -176,7 +198,6 @@ module.exports = function (app) {
             post_count = results;
 
             var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-
             connection.query('INSERT INTO group_post(idgroup_post, user_num, title, content, post_time) values (?,?,?,?,?)', [post_count[0].gp + 1, 0, body.name, body.content, new Date(Date.now() - tzoffset).toISOString().slice(0, 19).replace('T', ' ')], (err, results) => {
                 if (err) {
                     console.log(err);
