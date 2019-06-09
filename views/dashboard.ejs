@@ -18,11 +18,11 @@
             <div class="col-md-12 offset-md-1 col-lg-12 offset-lg-0">
                 <!-- Recently Favorited -->
                 <div class="widget dashboard-container my-adslist">
-                    <h3 class="widget-header"><strong>자유게시판</strong>
+                    <b class="widget-header"><strong>자유게시판</strong>
                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                         <button type="submit" class="btn btn-main" onclick="location.href ='/create-single-dashboard'">글 작성</button>
-                       </h3>
+                    </b>
                     <table class="table table-responsive product-dashboard-table">
                         <thead>
                         <tr>
@@ -71,7 +71,7 @@
 								</span>
                             </td>
                             <td class="text-center" td width=100 style="word-break:break-all"><span
-                                        class="align-bottom">2</span></td>
+                                        class="align-bottom"><%= post.reply_cnt %></span></td>
                             <td class="product-category"><span class="add-id"><%= post.post_time %></span></td>
                         </tr>
                         <% }) %>

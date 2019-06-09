@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.18, for macos10.12 (x86_64)
 --
--- Host: 127.0.0.1    Database: DBProject
+-- Host: 127.0.0.1    Database: db_project
 -- ------------------------------------------------------
 -- Server version	5.7.26
 
@@ -28,9 +28,8 @@ CREATE TABLE `group_post` (
   `title` varchar(255) NOT NULL,
   `content` varchar(255) NOT NULL,
   `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idgroup_post`),
-  UNIQUE KEY `user_num_UNIQUE` (`user_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idgroup_post`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +38,7 @@ CREATE TABLE `group_post` (
 
 LOCK TABLES `group_post` WRITE;
 /*!40000 ALTER TABLE `group_post` DISABLE KEYS */;
+INSERT INTO `group_post` VALUES (1,0,'자대에서 같이 배달 시키실 분?','ㅈㄱㄴ 난 컴공동방임','2019-06-09 04:10:56'),(2,1,'정건에서 고기 구워먹을분','고기먹고싶','2019-06-09 04:20:12');
 /*!40000 ALTER TABLE `group_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `group_reply` (
   `reply_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idgroup_reply`),
   UNIQUE KEY `user_num_UNIQUE` (`user_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `group_reply` (
 
 LOCK TABLES `group_reply` WRITE;
 /*!40000 ALTER TABLE `group_reply` DISABLE KEYS */;
+INSERT INTO `group_reply` VALUES (1,1,1,'저요~','2019-06-09 04:41:59'),(2,7,0,'오 고기 고','2019-06-09 04:42:33');
 /*!40000 ALTER TABLE `group_reply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,6 +283,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (0,'0621','오형민',960621,'치즈사이다'),(1,'0715','정선교',910715,'사랑꾼');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -294,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-08 21:59:38
+-- Dump completed on 2019-06-09 15:24:26

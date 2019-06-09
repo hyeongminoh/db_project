@@ -75,18 +75,43 @@ module.exports = function (app) {
                         console.log(err);
                         res.render('error');
                     }
-                    posts = results;
-                    console.log(posts);
-                    connection.query('SELECT count(*) FROM group_post gp, group_reply gr WHERE gp.idgroup_post=gr.idgroup_post', (err, results) => {
+                    var posts=[]
+                    for(var j = 0; j< results.length; j++){
+                        var temp = {
+                            idgroup_post : '',
+                            title : '',
+                            content : '',
+                            post_time : '',
+                            nickname :'',
+                            reply_cnt : 0
+                        }
+                        temp.idgroup_post = results[j].idgroup_post
+                        temp.title = results[j].title
+                        temp.content = results[j].content
+                        temp.post_time = results[j].post_time
+                        temp.nickname = results[j].nickname
+                        posts.push(temp)
+
+                    }
+                    connection.query('SELECT count(*) "replyCnt",idgroup_post  FROM group_reply Group by idgroup_post', (err, results) => {
                         if (err) {
                             console.log(err);
                             res.render('error');
                         }
-                        console.log(results);
+                        console.log(results)
+                        for(var j = 0; j< results.length; j++){
+                            for(var i =0; i<posts.length; i++){
+                                if(posts[i].idgroup_post == results[j].idgroup_post){
+                                    console.log(results[j].idgroup_post)
+                                    posts[i].reply_cnt = results[j].replyCnt
+                                    break;
+                                }
+                            }
+                        }
+                        console.log(posts);
                         res.render('dashboard', {
                                 'types': types,
-                                'posts': posts,
-                                'reply_num': results
+                                'posts': posts
                         });
                     
                     });
