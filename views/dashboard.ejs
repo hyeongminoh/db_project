@@ -41,9 +41,8 @@
                             <td class="text-center" td width=150 style="word-break:break-all"><span
                                         class="align-bottom"><%= post.idgroup_post %></span></td>
                             <td class="product-details">
-                                <a class="title" href="/single-board"><strong><%= post.title %></strong></a>
+                                <a class="title" a href="/single-board/<%= post.idgroup_post %>"><strong><%= post.title %></strong></a>
                                 <span class="add-id"><%= post.content %></span>
-                                <span class="add-id"><strong>시간:</strong><%= post.post_time %></span>
                             </td>
                             <td class="product-category"><span class="categories"><%= post.nickname %>
 								<span class="action" data-title="Action">
