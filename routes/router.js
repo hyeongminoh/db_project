@@ -29,25 +29,25 @@ module.exports = function (app) {
                         selected_res = []
                         count = 0
                         console.log(top_res.length)
-                        for(var i =0; i<top_res.length; i++){
-                            console.log(i,":",top_res[i].idrestaurant)
-                            connection.query('SELECT * FROM restaurant where idrestaurant = ?',top_res[i].idrestaurant, (err, results) => {
+                        for (var i = 0; i < top_res.length; i++) {
+                            console.log(i, ":", top_res[i].idrestaurant)
+                            connection.query('SELECT * FROM restaurant where idrestaurant = ?', top_res[i].idrestaurant, (err, results) => {
                                 selected_res.push(results[0])
-                                count ++
-                                if(count == top_res.length){
+                                count++
+                                if (count == top_res.length) {
                                     console.log(selected_res)
                                     console.log(locations);
                                     res.render('index', {
                                         'types': types,
                                         'locations': locations,
                                         'restaurants': restaurant,
-                                        'selected' : selected_res
+                                        'selected': selected_res
                                     });
                                 }
                             });
                         }
-                        
-                });
+
+                    });
                 });
 
             });
@@ -75,15 +75,15 @@ module.exports = function (app) {
                         console.log(err);
                         res.render('error');
                     }
-                    var posts=[]
-                    for(var j = 0; j< results.length; j++){
+                    var posts = []
+                    for (var j = 0; j < results.length; j++) {
                         var temp = {
-                            idgroup_post : '',
-                            title : '',
-                            content : '',
-                            post_time : '',
-                            nickname :'',
-                            reply_cnt : 0
+                            idgroup_post: '',
+                            title: '',
+                            content: '',
+                            post_time: '',
+                            nickname: '',
+                            reply_cnt: 0
                         }
                         temp.idgroup_post = results[j].idgroup_post
                         temp.title = results[j].title
@@ -99,9 +99,9 @@ module.exports = function (app) {
                             res.render('error');
                         }
                         console.log(results)
-                        for(var j = 0; j< results.length; j++){
-                            for(var i =0; i<posts.length; i++){
-                                if(posts[i].idgroup_post == results[j].idgroup_post){
+                        for (var j = 0; j < results.length; j++) {
+                            for (var i = 0; i < posts.length; i++) {
+                                if (posts[i].idgroup_post == results[j].idgroup_post) {
                                     console.log(results[j].idgroup_post)
                                     posts[i].reply_cnt = results[j].replyCnt
                                     break;
@@ -110,10 +110,10 @@ module.exports = function (app) {
                         }
                         console.log(posts);
                         res.render('dashboard', {
-                                'types': types,
-                                'posts': posts
+                            'types': types,
+                            'posts': posts
                         });
-                    
+
                     });
                 });
             });
@@ -160,11 +160,33 @@ module.exports = function (app) {
                             });
                         });
                     });
+
                 });
             });
         });
     });
 
+    app.post('/create-single-dashboard', function (req, res, next) {
+        var body = req.body;
+        connection.query('SELECT COUNT(*) as gp FROM group_post', (err, results) => {
+            if (err) {
+                console.log(err);
+                res.render('error');
+            }
+            post_count = results;
+
+            var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+
+            connection.query('INSERT INTO group_post(idgroup_post, user_num, title, content, post_time) values (?,?,?,?,?)', [post_count[0].gp + 1, 0, body.name, body.content, new Date(Date.now() - tzoffset).toISOString().slice(0, 19).replace('T', ' ')], (err, results) => {
+                if (err) {
+                    console.log(err);
+                    res.render('error');
+                }
+                console.log(results);
+                res.redirect('/dashboard');
+            });
+        });
+    });
 
     app.get('/create-single-dashboard', function (req, res, next) {
         var locatons;
@@ -283,5 +305,6 @@ module.exports = function (app) {
         });
     });
 
-
 }
+
+
