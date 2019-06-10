@@ -282,7 +282,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'0621','오형민',960621,'치즈사이다'),(1,'0715','정선교',910715,'사랑꾼');
+INSERT INTO `user` VALUES (0,'0621','오형민',960621,'치즈사이다'),(1,'0715','정선교',910715,'사랑꾼'),(2,'1213', '김철수', 971213,'학식요정'),(3,'0505','이영희', 940505, '밤샘야식');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
