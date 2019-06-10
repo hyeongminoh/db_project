@@ -183,7 +183,7 @@ module.exports = function (app) {
             reply_count = results;
 
             var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-            connection.query('INSERT INTO group_reply(idgroup_reply, idgroup_post, user_num, content, reply_time) values (?,?,?,?,?)', [reply_count[0].gr + 1, req.params.idgroup_post, 0, body.content, new Date(Date.now() - tzoffset).toISOString().slice(0, 19).replace('T', ' ')], (err, results) => {
+            connection.query('INSERT INTO group_reply(idgroup_reply, idgroup_post, user_num, content, reply_time) values (?,?,?,?,?)', [reply_count[0].gr + 1, req.params.idgroup_post, sess.user_info.user_num, body.content, new Date(Date.now() - tzoffset).toISOString().slice(0, 19).replace('T', ' ')], (err, results) => {
                 if (err) {
                     console.log(err);
                     res.render('error');
@@ -206,7 +206,7 @@ module.exports = function (app) {
             post_count = results;
 
             var tzoffset = (new Date()).getTimezoneOffset() * 60000;
-            connection.query('INSERT INTO group_post(idgroup_post, user_num, title, content, post_time) values (?,?,?,?,?)', [post_count[0].gp + 1, 0, body.name, body.content, new Date(Date.now() - tzoffset).toISOString().slice(0, 19).replace('T', ' ')], (err, results) => {
+            connection.query('INSERT INTO group_post(idgroup_post, user_num, title, content, post_time) values (?,?,?,?,?)', [post_count[0].gp + 1, sess.user_info.user_num, body.name, body.content, new Date(Date.now() - tzoffset).toISOString().slice(0, 19).replace('T', ' ')], (err, results) => {
                 if (err) {
                     console.log(err);
                     res.render('error');

@@ -5,7 +5,7 @@ module.exports = function(app){
 	const router = express.Router();
 	const url = require('url');
 	var bodyParser = require('body-parser');
-  app.use(bodyParser.json());
+    app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended :false}));
 
 
@@ -16,6 +16,8 @@ module.exports = function(app){
 
 	app.get('/restaurant/:restaurantid', function(req, res, next) {
         var sqlquery =  "SELECT  * FROM restaurant WHERE idrestaurant=?";
+        const sess = req.session;
+        console.log(sess);
         console.log("restaurantid:",req.params.restaurantid)
         var name,location,time,menu_type,reservation,phone,id_menu_type, idlocation,walk_time,image
 				var idrestaurant
@@ -98,7 +100,7 @@ module.exports = function(app){
 								                              console.log(review)
 																							console.log(row)
 																							console.log(row[0].idrestaurant)
-								                               res.render('restaurant',{types : types,info : info, menu : menu, review: review });
+								                               res.render('restaurant',{types : types,info : info, menu : menu, review: review, session : sess });
 																			});
 
                                     })
