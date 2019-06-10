@@ -85,8 +85,8 @@ module.exports = function(app){
 												review: '',
 												star: '',
 												idrestaurant:'',
-												idreview : '',
-												hashtag: []
+												idreview : ''
+												// hashtag: []
 											}
 											temp.idrestaurant = row[i].idrestaurant
 											temp.review = row[i].review
@@ -95,9 +95,17 @@ module.exports = function(app){
 											review.push(temp)
 											var sqlquery5 ="SELECT h.content FROM hashtag h, hashtag_connection c WHERE h.idhashtag = c.idhashtag and c.idreview = ? and c.idrestaurant=?";
 											console.log("reviewid", row[i].idreview)
+											var reviewid = row[i].idreview
 											connection.query(sqlquery5, [row[i].idreview,req.params.restaurantid] ,function(err, row1)  {
 												console.log("hashtag:",row1)
-												temp.hashtag = row1
+												review[count].hashtag = row1
+												// for(var k =0; k<review.length; k++){
+												// 	if(review[k].idreview == reviewid){
+												// 		for(var j =0; j<row1.length; j++){
+												// 			review[k].hashtag.push(row1[j].content)
+												// 		}
+												// 	}
+												// }
 												count++
 												if(count == row.length){
 													console.log(review)
