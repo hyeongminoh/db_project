@@ -1,5 +1,6 @@
 module.exports = function(app){
 
+<<<<<<< HEAD
     const http = require('http');
     const express = require('express');
     const router = express.Router();
@@ -10,6 +11,15 @@ module.exports = function(app){
 
     app.get('/restaurant/:restaurantid', function(req, res, next) {
 
+	const http = require('http');
+	const express = require('express');
+	const router = express.Router();
+	const url = require('url');
+	var bodyParser = require('body-parser');
+  	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({extended :false}));
+
+	app.get('/restaurant/:restaurantid', function(req, res, next) {
         var sqlquery =  "SELECT  * FROM restaurant WHERE idrestaurant=?";
         const sess = req.session;
         console.log("restaurantid:",req.params.restaurantid)
@@ -117,6 +127,40 @@ module.exports = function(app){
                                             });
                                         }
                                     });
+										var sqlquery4 ="SELECT * FROM review WHERE idrestaurant=?";
+										var review = []
+										var count = 0
+										connection.query(sqlquery4, req.params.restaurantid ,function(err, row)  {
+										if (err){
+												console.log('리뷰오류');
+										}
+										for(var i =0; i<row.length; i++){
+											var temp = {
+												review: '',
+												star: '',
+												idrestaurant:'',
+												idreview : ''
+												// hashtag: []
+											}
+											temp.idrestaurant = row[i].idrestaurant
+											temp.review = row[i].review
+											temp.idreview = row[i].idreview
+											temp.star = row[i].star
+											review.push(temp)
+											var sqlquery5 ="SELECT h.content FROM hashtag h, hashtag_connection c WHERE h.idhashtag = c.idhashtag and c.idreview = ? and c.idrestaurant=?";
+											console.log("reviewid", row[i].idreview)
+											var reviewid = row[i].idreview
+											connection.query(sqlquery5, [row[i].idreview,req.params.restaurantid] ,function(err, row1)  {
+												console.log("hashtag:",row1)
+												review[count].hashtag = row1
+												count++
+												if(count == row.length){
+													console.log(review)
+													res.render('restaurant',{types : types,info : info, menu : menu, review: review,session : sess});
+												}
+											});
+										}
+									});
 
 
                                 })
