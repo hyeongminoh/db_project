@@ -3,6 +3,25 @@
 
 <% include ./navigator.ejs %>
 
+<head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<style>
+		.animated {
+			-webkit-transition: height 0.2s;
+			-moz-transition: height 0.2s;
+			transition: height 0.2s;
+		}
+
+		.stars {
+			margin: 20px 0;
+			font-size: 24px;
+			color: #d17581;
+		}
+	</style>
+</head>
+
 <!--================================
 =            Page Title            =
 =================================-->
@@ -22,104 +41,135 @@
 =            Blog Section            =
 ===================================-->
 
-<section class="blog single-board section">
-	<div class="container">
-		<!-- <div class="row"> -->
-			<div class="col-md-12">
+<body>
+	<section class="blog single-board section">
+		<div class="row">
+			<!-- <div class="row"> -->
+			<div class="co-md-offset-1">
+			</div>
+			<div class=" col-md-6">
 				<article class="single-post">
 					<img src="<%=info.image%>" alt="article-01">
+
+					<p><b>위치</b> : <%=info.location%> <br>
+						<b>걸리는 시간</b> : <%=info.walk_time%> <br>
           <p><b>위치</b> : <%=info.location%> <br>
-            <b>걸리는 시간(예상시간)</b> : 약 <%=info.walk_time%> 분 <br> 
+            <b>걸리는 시간(예상시간)</b> : 약 <%=info.walk_time%> 분 <br>
 						<%if (info.time==null){ %>
-							<b>영업 시간</b> : -- <br>
+						<b>영업 시간</b> : -- <br>
 						<% } else { %>
-							<b>영업 시간</b> : <%=info.time%> <br>
+						<b>영업 시간</b> : <%=info.time%> <br>
 						<% } %>
 						<b>분류</b> : <%=info.menu_type%><br>
 						<%if (info.reservaion==0){ %>
-							<b>예약 가능 여부</b> : X <br>
+						<b>예약 가능 여부</b> : X <br>
 						<% } else {  %>
-							<b>예약 가능 여부</b> : O <br>
+						<b>예약 가능 여부</b> : O <br>
 						<% } %>
 						<b>연락처</b> : <%=info.phone%><br></p>
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">menu</th>
-									<th scope="col">가격</th>
-								</tr>
-							</thead>
-							<tbody>
-								<%if (menu.length!=1){ %>
-									<%for (var i =0; i< menu.length; i++){ %>
-									<tr>
-										<th scope="row"> <%=i+1%></th>
-										<td> <%=menu[i].menu_name%></td>
-										<td><%=menu[i].price%></td>
-									</tr>
-									<% } %>
-								<% } %>
-							</tbody>
-						</table>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">menu</th>
+								<th scope="col">가격</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%if (menu.length!=1){ %>
+							<%for (var i =0; i< menu.length; i++){ %>
+							<tr>
+								<th scope="row"> <%=i+1%></th>
+								<td> <%=menu[i].menu_name%></td>
+								<td><%=menu[i].price%></td>
+							</tr>
+							<% } %>
+							<% } %>
+						</tbody>
+					</table>
 				</article>
-				<div class="block comment">
-					<h4>Leave A Comment</h4>
-					<form action="#">
-						<!-- Message -->
-						<div class="form-group mb-30">
-						    <label for="message">Message</label>
-						    <textarea class="form-control" id="message" rows="8"></textarea>
-						</div>
-						<div class="row">
-							<div class="col-sm-12 col-md-6">
-								<!-- Name -->
-								<div class="form-group mb-30">
-								    <label for="name">Name</label>
-								    <input type="text" class="form-control" id="name">
-								</div>
-							</div>
-							<div class="col-sm-12 col-md-6">
-								<!-- Email -->
-								<div class="form-group mb-30">
-								    <label for="email">Email</label>
-								    <input type="email" class="form-control" id="email">
-								</div>
-							</div>
-						</div>
-						<button class="btn btn-transparent">Leave Comment</button>
+			</div>
+			<div class="col-md-5">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">content</th>
+							<th scope="col">review</th>
+							<th scope="col">star</th>
+							<th scope="col">like</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%if (review.length!=1){ %>
+						<%for (var j =0; j< review.length; j++){ %>
+						<tr>
+							<th scope="row"> <%=j+1%></th>
+							<td> <%=review[j].content%></td>
+							<td><%=review[j].review%></td>
+							<td> <%if (review[j].star!=0){ %>
+								<%for(var k=0; k<review[j].star; k++){%>
+								★
+								<% } %>
+								<% } %>
+								<% if(5-review[j].star!=0){%>
+								<%for(var p=0; p<(5-review[j].star); p++){%>
+								☆
+								<% } %>
+								<%}%></td>
+							<td><%=review[j].like%></td>
+						</tr>
+						<% } %>
+						<% } %>
+					</tbody>
+				</table>
+
+				<!--review입력-->
+				<h2>리뷰를 입력해주세요</h2>
+				<hr>
+				<div class="import review">
+					<form action="/restaurant/<%= info.idrestaurant %> "method="POST">
+						<label for="content">학번</label>
+							<input type="text" class="form-control" id="user_num" name="user_num">
+							<label for="content">해시태그</label>
+								<input type="text" class="form-control" id="content" name="content">
+								<label for="content">리뷰</label>
+									<input type="text" class="form-control" id="review" name="review">
+									<label for="content">별점</label>
+										<input type="text" class="form-control" id="star" name="star">
+						<button class="btn btn-danger">작성</button>
 					</form>
 				</div>
-			</div>
-			</div>
-		<!-- </div> -->
 	</div>
-</section>
 
 
-<!--============================
-=            Footer            =
-=============================-->
-<% include ./footer.ejs %>
+			<!-- </div> -->
 
-  <!-- JAVASCRIPTS -->
-  <script src="/plugins/jquery/jquery.min.js"></script>
-  <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script src="/plugins/tether/js/tether.min.js"></script>
-  <script src="/plugins/raty/jquery.raty-fa.js"></script>
-  <script src="/plugins/bootstrap/dist/js/popper.min.js"></script>
-  <script src="/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-  <script src="/plugins/slick-carousel/slick/slick.min.js"></script>
-  <script src="/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="/plugins/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="/plugins/smoothscroll/SmoothScroll.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-  <script src="/js/scripts.js"></script>
+
+	</section>
+
+	<!--============================
+																=            Footer            =
+																=============================-->
+	<% include ./footer.ejs %>
+
+	<!-- JAVASCRIPTS -->
+	<script src="/plugins/jquery/jquery.min.js"></script>
+	<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script src="/plugins/tether/js/tether.min.js"></script>
+	<script src="/plugins/raty/jquery.raty-fa.js"></script>
+	<script src="/plugins/bootstrap/dist/js/popper.min.js"></script>
+	<script src="/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+	<script src="/plugins/slick-carousel/slick/slick.min.js"></script>
+	<script src="/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="/plugins/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/plugins/smoothscroll/SmoothScroll.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+	<script src="/js/scripts.js"></script>
+
+
 
 </body>
 
 </html>
-
-
-
