@@ -7,8 +7,19 @@ const logger = require('morgan');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const sha256 = require('sha256');
+const session = require('express-session');
+const crypto = require('crypto');
 // const db = require('./db.js');
 const app = express();
+
+const secret_key = crypto.randomBytes(48);
+
+app.use(session({
+    secret: secret_key.toString('hex'),
+    resave: false,
+    saveUninitialized: true
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

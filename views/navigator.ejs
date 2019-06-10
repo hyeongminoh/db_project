@@ -84,9 +84,15 @@
 							</li>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
+						<% if(!session.user_info) { %>
 							<li class="nav-item">
-								<a class="nav-link login-button" href="/">치즈사이다</a>
+								<a class="nav-link login-button" href="/signin">로그인</a>
 							</li>
+						<% } else { %>
+							<li class="nav-item">
+								<a class="nav-link login-button" href="/"><%= session.user_info.nickname %></a>
+							</li>
+						<% } %>
 							<div class="nav-item">
 							<select>
 								<% locations.forEach(function(location){ %>

@@ -4,10 +4,12 @@ module.exports = function (app) {
     const express = require('express');
     const router = express.Router();
     const url = require('url');
-
+    const sha256 = require('sha256');
 
     /* GET home page. */
     app.get('/', function (req, res, next) {
+
+        const sess = req.session;
 
         connection.query('SELECT * FROM menu_type', (err, results) => {
             if (err) {
@@ -41,7 +43,8 @@ module.exports = function (app) {
                                         'types': types,
                                         'locations': locations,
                                         'restaurants': restaurant,
-                                        'selected': selected_res
+                                        'selected': selected_res,
+                                        session : sess
                                     });
                                 }
                             });
@@ -57,6 +60,7 @@ module.exports = function (app) {
     app.get('/dashboard', function (req, res, next) {
         var locatons;
         var types;
+        const sess = req.session;
         connection.query('SELECT * FROM menu_type', (err, results) => {
             if (err) {
                 console.log(err);
@@ -111,7 +115,8 @@ module.exports = function (app) {
                         console.log(posts);
                         res.render('dashboard', {
                             'types': types,
-                            'posts': posts
+                            'posts': posts,
+                            session : sess
                         });
 
                     });
@@ -121,6 +126,7 @@ module.exports = function (app) {
     });
 
     app.get('/single-board/:idgroup_post', function (req, res, next) {
+        const sess = req.session;
         connection.query('SELECT * FROM menu_type', (err, results) => {
             if (err) {
                 console.log(err);
@@ -155,7 +161,7 @@ module.exports = function (app) {
                                     'posts': posts,
                                     'post_user': post_user,
                                     'reply_user': reply_user,
-
+                                    session : sess
                                 });
                             });
                         });
@@ -168,6 +174,7 @@ module.exports = function (app) {
 
     app.post('/single-board/:idgroup_post', function (req, res, next) {
         var body = req.body;
+        const sess = req.session;
         connection.query('SELECT COUNT(*) as gr FROM group_reply ', (err, results) => {
             if (err) {
                 console.log(err);
@@ -190,6 +197,7 @@ module.exports = function (app) {
 
     app.post('/create-single-dashboard', function (req, res, next) {
         var body = req.body;
+        const sess = req.session;   
         connection.query('SELECT COUNT(*) as gp FROM group_post', (err, results) => {
             if (err) {
                 console.log(err);
@@ -212,6 +220,7 @@ module.exports = function (app) {
     app.get('/create-single-dashboard', function (req, res, next) {
         var locatons;
         var types;
+        const sess = req.session;
         connection.query('SELECT * FROM menu_type', (err, results) => {
             if (err) {
                 console.log(err);
@@ -229,7 +238,8 @@ module.exports = function (app) {
 
                 res.render('create-single-dashboard', {
                     'types': types,
-                    'locations': locations
+                    'locations': locations,
+                    session : sess
                 });
 
             });
@@ -248,12 +258,14 @@ module.exports = function (app) {
         console.log(searchword);
         var locatons;
         var types;
+        const sess = req.session;
         connection.query('SELECT * FROM menu_type', (err, results) => {
             if (err) {
                 console.log(err);
                 res.render('error');
             }
             types = results;
+
             connection.query('SELECT * FROM location', (err, results) => {
                 if (err) {
                     console.log(err);
@@ -272,6 +284,7 @@ module.exports = function (app) {
                         'types': types,
                         'locations': locations,
                         'restaurants': results,
+                        session : sess
                     });
 
                 });
@@ -284,9 +297,14 @@ module.exports = function (app) {
         res.render('user-profile');
     });
 
+    
+    app.get('/signin', function(req, res, next) {
+    res.render('signin');
+    });
 
     app.post('/do_search', function (req, res, next) {
 
+        const sess = req.session;
         var body = req.body;
         var searchword = body.searchword;
         console.log(searchword);
@@ -318,13 +336,67 @@ module.exports = function (app) {
                         'types': types,
                         'locations': locations,
                         'search_results': results,
-                        'searchword': searchword
+                        'searchword': searchword,
+                        session : sess
                     });
 
                 });
             });
         });
     });
+
+        //로그인 코드
+      app.post('/do_signin',  function (req,res){
+         const body = req.body;
+         const nickname = req.body.nickname;
+         var pass = req.body.pass;
+         console.log(body);
+         var flag = false;
+         var id = 0;
+         //유저 찾기
+         connection.query('SELECT * FROM user WHERE nickname = ? LIMIT 1', [nickname], (err, result) => {
+               if (err) throw err;
+               console.log(result);
+
+               if (result.length === 0) {
+                     console.log('없음');
+                     // res.json({success: false});
+                     res.redirect(url.format({
+                           pathname: '/signin',
+                           query: {
+                                 'success': false,
+                                 'message': 'Login failed: ID does not exist'
+                           }
+                     }));
+               } else {
+                     if (pass != result[0].pw) {
+                           console.log('비밀번호 불일치');
+                           res.redirect(url.format({
+                                 pathname: '/signin',
+                                 query: {
+                                       'success': false,
+                                       'message': 'Login failed: Password Incorrect'
+                                 }
+                           }));
+                     } else {
+                           console.log('로그인 성공');
+
+                           //세션에 유저 정보 저장
+                           req.session.user_info = result[0];
+                           flag = true;
+                           id = result[0].user_id;
+                           res.redirect('/');
+                           // res.redirect(url.format({
+                           //       pathname: '/',
+                           //       query: {
+                           //             'success': true,
+                           //             'message': 'Login success'
+                           //       }
+                           // }));
+                     }
+               }
+         });
+   });
 
 }
 
