@@ -1,5 +1,6 @@
 module.exports = function(app){
 
+<<<<<<< Updated upstream
     const http = require('http');
     const express = require('express');
     const router = express.Router();
@@ -9,6 +10,19 @@ module.exports = function(app){
     app.use(bodyParser.urlencoded({extended :false}));
 
     app.get('/restaurant/:restaurantid', function(req, res, next) {
+=======
+	const http = require('http');
+	const express = require('express');
+	const router = express.Router();
+	const url = require('url');
+	var bodyParser = require('body-parser');
+  	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({extended :false}));
+
+	app.get('/restaurant/:restaurantid', function(req, res, next) {
+		const sess = req.session;
+
+>>>>>>> Stashed changes
         var sqlquery =  "SELECT  * FROM restaurant WHERE idrestaurant=?";
         const sess = req.session;
         console.log("restaurantid:",req.params.restaurantid)
@@ -145,7 +159,7 @@ module.exports = function(app){
 												count++
 												if(count == row.length){
 													console.log(review)
-													res.render('restaurant',{types : types,info : info, menu : menu, review: review });
+													res.render('restaurant',{types : types,info : info, menu : menu, review: review,session : sess});
 												}
 											});
 										}
