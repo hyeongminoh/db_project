@@ -1,11 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<% include ./navigator.ejs %>
+	<head>
+
+		<!-- SITE TITTLE -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>경희대 오늘 뭐 뭐먹지?</title>
+		
+		<!-- PLUGINS CSS STYLE -->
+		<link href="/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+		<!-- Bootstrap -->
+		<link href="/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" >
+		<!-- Font Awesome -->
+		<link href="/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		
+		<!-- Owl Carousel -->
+		<link href="/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+		<link href="/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+		<!-- Fancy Box -->
+		<link href="/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+		<link href="/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+		<link href="/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+		
+		
+		<!-- CUSTOM CSS -->
+		<link href="/css/style.css" rel="stylesheet">
+		
+		<!-- FAVICON -->
+		<link href="/images/favicon.ico" rel="shortcut icon">
+	  
+	  
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	  
+	  </head>
+	  
+	  <body class="body-wrapper">
+	  
+	  
+	  <section>
+		  <div class="container">
+			  <div class="row">
+				  <div class="col-md-12">
+					  <nav class="navbar navbar-expand-lg  navigation">
+						  <a class="navbar-brand" href="/">
+							  <img src="/images/logo.JPG" alt="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						  </a>
+						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						  <span class="navbar-toggler-icon"></span>
+						  </button>
+						  
+						  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+							  <ul class="navbar-nav ml-auto main-nav ">
+								  <li class="nav-item active">
+									<br><br><br>
+									  <a class="nav-link" href="/">Home</a>
+								  </li>
+								  <li class="nav-item">
+									<br><br><br>
+									  <a class="nav-link" href="/dashboard">게시판</a>
+								  </li>
+								  <li class="nav-item dropdown dropdown-slide">
+									<br><br><br>
+									  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  메뉴 <span><i class="fa fa-angle-down"></i></span>
+									  </a>
+									  <!-- Dropdown list -->
+									  <div class="dropdown-menu dropdown-menu-right">
+									
+									  <% types.forEach(function(type){ %>
+											 <a class="dropdown-item" href="/category/<%= type.idmenu_type %>"><%= type.type %></a>
+									   <% }) %>
+										  
+									  </div>
+								  </li>
+								  <li class="nav-item dropdown dropdown-slide">
+										<br><br><br>
+									  <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  추천 <span><i class="fa fa-angle-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									  </a>
+									  <!-- Dropdown list -->
+									  <div class="dropdown-menu dropdown-menu-right">
+										  <a class="dropdown-item" href="#">Action</a>
+										  <a class="dropdown-item" href="#">Another action</a>
+										  <a class="dropdown-item" href="#">Something else here</a>
+									  </div>
+								  </li>
+							  </ul>
+							  <ul class="navbar-nav ml-auto mt-10">
+							  <% if(!session.user_info) { %>
+								  <li class="nav-item">
+										<br><br><br>
+									  <a class="nav-link login-button" href="/signin">로그인</a>
+								  </li>
+							  <% } else { %>
+								  <li class="nav-item">
+										<br><br><br>
+									  <a class="nav-link login-button" href="/"><%= session.user_info.nickname %></a>
+								  </li>
+							  <% } %>
+								  <div class="nav-item">
+									<br><br><br>
+								  <select>
+									  <% locations.forEach(function(location){ %>
+										
+										  <option value=<%= location.idlocation %>><%= location.loc_name %></option>
+									  <% }) %>
+								  </select>
+								  </div>
+	  
+								  
+							  </ul>
+						  </div>
+					  </nav>
+				  </div>
+			  </div>
+		  </div>
+	  </section>
 
 <!--================================
 =            Page Title            =
 =================================-->
+<br>
 <section class="page-title">
 	<!-- Container Start -->
 	<div class="container">
@@ -57,7 +181,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<%if (menu.length!=1){ %>
+							<%if (menu.length!=0){ %>
 							<%for (var i =0; i< menu.length; i++){ %>
 							<tr>
 								<th scope="row"> <%=i+1%></th>
@@ -71,50 +195,56 @@
 				</article>
 			</div>
 				<hr color ="black" size = "2">
-			<div class="col-md-11">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Hashtag</th>
-							<th scope="col">Review</th>
-							<th scope="col">Star</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%if (review.length!=1){ %>
-						<%for (var j =0; j< review.length; j++){ %>
-						<tr>
-							<th scope="row"> <%=j+1%></th>
-							<td> 
-								<% review[j].hashtag.forEach(function(item){ %>
+				<div class="col-md-11">
+					<div class="container">
+						
+				<%if (review.length!=0){ %>
+				<%for (var j =0; j< review.length; j++){ %>		
+					<div class="row">
+								<div class="col-sm-1">
+								<div class="thumbnail">
+								<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+								</div><!-- /thumbnail -->
+								</div>
+								
+								<div class="col-sm-10">
+								<div class="panel panel-default">
+								<div class="panel-heading">
+								<strong>
+								<%if (review[j].star!=0){ %>
+									<%for(var k=0; k<review[j].star; k++){%>
+									★
+									<% } %>
+									<% } %>
+									<% if(5-review[j].star!=0){%>
+									<%for(var p=0; p<(5-review[j].star); p++){%>
+									☆
+									<% } %>
+									<%}%>
+								</strong>
+								</div>
+								<div class="panel-body">
+								<b><%=review[j].review%><b>
+								<p><% review[j].hashtag.forEach(function(item){ %>
 									<%=item.content%>
-								<% }) %>
-							</td>
-							<td><%=review[j].review%></td>
-							<td> <%if (review[j].star!=0){ %>
-								<%for(var k=0; k<review[j].star; k++){%>
-								★
-								<% } %>
-								<% } %>
-								<% if(5-review[j].star!=0){%>
-								<%for(var p=0; p<(5-review[j].star); p++){%>
-								☆
-								<% } %>
-								<%}%></td>
-						</tr>
-						<% } %>
-						<% } %>
-					</tbody>
-				</table>
-
+								<% }) %></p>
+								</div><!-- /panel-body -->
+								</div><!-- /panel panel-default -->
+								</div><!-- /col-sm-5 -->
+							</div><!-- /row -->	
+				<% } %>
+				<% } %>	
+			</div>
+				
 				<!--review입력-->
-				<h2>리뷰를 입력해주세요</h2>
+		<div class="col-md-11">
+			<div class="container">
+				<b>리뷰를 입력해주세요</b>
 				<hr>
 				<div class="import review">
-	<form action="/restaurant/<%= info.idrestaurant %> "method="POST">
+				<form action="/restaurant/<%= info.idrestaurant %> "method="POST">
 							<label for="content">해시태그</label>
-								<input type="text" class="form-control" id="content" name="content">
+								<input type="text" class="form-control" id="hashtag" name="hashtag">
 								<label for="content">리뷰</label>
 									<input type="text" class="form-control" id="review" name="review">
 									<label for="content">별점</label>
@@ -122,8 +252,9 @@
 						<button class="btn btn-danger">작성</button>
 					</form>
 				</div>
-	</div>
-
+			</div>
+			</div>
+		</div>
 
 			<!-- </div> -->
 
