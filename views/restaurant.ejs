@@ -44,11 +44,11 @@
 
 <body>
 	<section class="blog single-board section">
-		<div class="row">
+		<div class="container">
 			<!-- <div class="row"> -->
 			<div class="co-md-offset-1">
 			</div>
-			<div class=" col-md-6">
+			<div class=" col-md-12">
 				<article class="single-post">
 					<img src="<%=info.image%>" alt="article-01">
 
@@ -90,7 +90,8 @@
 					</table>
 				</article>
 			</div>
-			<div class="col-md-5">
+				<hr color ="black" size = "2">
+			<div class="col-md-11">
 				<table class="table">
 					<thead>
 						<tr>
@@ -128,8 +129,6 @@
 				<hr>
 				<div class="import review">
 	<form action="/restaurant/<%= info.idrestaurant %> "method="POST">
-						<label for="content">학번</label>
-							<input type="text" class="form-control" id="user_num" name="user_num">
 							<label for="content">해시태그</label>
 								<input type="text" class="form-control" id="content" name="content">
 								<label for="content">리뷰</label>
