@@ -76,9 +76,9 @@
 					<thead>
 						<tr>
 							<th scope="col">#</th>
-							<th scope="col">content</th>
-							<th scope="col">review</th>
-							<th scope="col">star</th>
+							<th scope="col">Hashtag</th>
+							<th scope="col">Review</th>
+							<th scope="col">Star</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -86,7 +86,11 @@
 						<%for (var j =0; j< review.length; j++){ %>
 						<tr>
 							<th scope="row"> <%=j+1%></th>
-							<td> <%=review[j].content%></td>
+							<td> 
+								<% review[j].hashtag.forEach(function(item){ %>
+									<%=item.content%>
+								<% }) %>
+							</td>
 							<td><%=review[j].review%></td>
 							<td> <%if (review[j].star!=0){ %>
 								<%for(var k=0; k<review[j].star; k++){%>
