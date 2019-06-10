@@ -5,14 +5,8 @@ module.exports = function(app){
 	const router = express.Router();
 	const url = require('url');
 	var bodyParser = require('body-parser');
-  app.use(bodyParser.json());
+  	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended :false}));
-
-
-
-
-
-
 
 	app.get('/restaurant/:restaurantid', function(req, res, next) {
         var sqlquery =  "SELECT  * FROM restaurant WHERE idrestaurant=?";
@@ -48,7 +42,7 @@ module.exports = function(app){
                         phone = row[0].phone
                         idlocation = row[0].idlocation
                         image = row[0].image
-												console.log("row[0]", row[0].idrestaurant);
+						console.log("row[0]", row[0].idrestaurant);
 
                         var sqlquery =  "SELECT  * FROM menu_type WHERE idmenu_type=?";
                         connection.query(sqlquery, id_menu_type, function (err, row) {
@@ -67,7 +61,7 @@ module.exports = function(app){
                                     connection.query(sqlquery3, idlocation, function (err, row) {
                                         walk_time = row[0].time
                                         var info = {
-																					 idrestaurant : idrestaurant ,
+											idrestaurant : idrestaurant ,
                                             name : name,
                                             location : location,
                                             time : time,
@@ -79,91 +73,104 @@ module.exports = function(app){
                                         }
                                         console.log(info)
                                         console.log(menu)
-																				var sqlquery4 ="SELECT h.content, t.review ,t.star,t.like FROM hashtag h ,review t, hashtag_connection c WHERE c.idreview = t.idreview AND c.idhashtag = h.idhashtag AND c.idrestaurant=?";
-																					connection.query(sqlquery4, req.params.restaurantid ,function(err, row)  {
-																					if (err){
-																							console.log('리뷰오류');
+										var sqlquery4 ="SELECT * FROM review WHERE idrestaurant=?";
+										var review = []
+										var count = 0
+										connection.query(sqlquery4, req.params.restaurantid ,function(err, row)  {
+										if (err){
+												console.log('리뷰오류');
+										}
+										for(var i =0; i<row.length; i++){
+											var temp = {
+												review: '',
+												star: '',
+												idrestaurant:'',
+												idreview : '',
+												hashtag: []
+											}
+											temp.idrestaurant = row[i].idrestaurant
+											temp.review = row[i].review
+											temp.idreview = row[i].idreview
+											temp.star = row[i].star
+											review.push(temp)
+											var sqlquery5 ="SELECT h.content FROM hashtag h, hashtag_connection c WHERE h.idhashtag = c.idhashtag and c.idreview = ? and c.idrestaurant=?";
+											console.log("reviewid", row[i].idreview)
+											connection.query(sqlquery5, [row[i].idreview,req.params.restaurantid] ,function(err, row1)  {
+												console.log("hashtag:",row1)
+												temp.hashtag = row1
+												count++
+												if(count == row.length){
+													console.log(review)
+													res.render('restaurant',{types : types,info : info, menu : menu, review: review });
+												}
+											});
+										}
+									});
 
-																					}
-
-																					for(var i =0; i<row.length; i++){
-																							var re_temp = {
-																									content : row[i].content,
-																									review:row[i].review,
-																									star : row[i].star,
-																									like : row[i].like
-																							}
-																							review.push(re_temp)
-																					}
-								                              console.log(review)
-																							console.log(row)
-																							console.log(row[0].idrestaurant)
-								                               res.render('restaurant',{types : types,info : info, menu : menu, review: review });
-																			});
-
-                                    })
-                                })
-                            }
-                            else{
-                                console.log("음식 선택 오류!")
-                            }
-                        })
+								})
+							})
+						}
+						else{
+							console.log("음식 선택 오류!")
+						}
+					})
 
 
-                    }
-                    else{
-                        console.log("식당 선택 오류!")
-                    }
+				}
+				else{
+					console.log("식당 선택 오류!")
+				}
 
                 });
             });
         });
-    });
-		app.post('/restaurant/:restaurantid', function(req, res,next) {
+	});
+	
+	app.post('/restaurant/:restaurantid', function(req, res,next) {
 
-	    var body = req.body;
-	    var user_num = body.user_num;
-	    var content = body.content;
-	    var review = body.review;
-	    var star = body.star;
-	    console.log(user_num);
-	    console.log(content);
-	    console.log(review);
-	    console.log(star);
-	    console.log("restaurantid:", req.params.restaurantid);
-	    var insertQuery = 'INSERT INTO hashtag (content) VALUES (?)';
-	    connection.query(insertQuery, [content], function(err, results) {
-	      if (err) {
-	        console.log(err);
-	        res.render('error');
-	      }
-	      console.log("Data inserted!1");
-	      console.log(results);
-
-
-
-	      var insertQuery2 = 'INSERT INTO review (user_num,idrestaurant,review ,star)  VALUES (?,?,?,?)';
-	      connection.query(insertQuery2, [user_num, req.params.restaurantid, review, star], function(err, results) {
-	        if (err) {
-	          console.log(err);
-	          res.render('error');
-	        }
-	        console.log("Data inserted!2");
-	        console.log(results);
+	var body = req.body;
+	var user_num = body.user_num;
+	var content = body.content;
+	var review = body.review;
+	var star = body.star;
+	console.log(user_num);
+	console.log(content);
+	console.log(review);
+	console.log(star);
+	console.log("restaurantid:", req.params.restaurantid);
+	var insertQuery = 'INSERT INTO hashtag (content) VALUES (?)';
+	connection.query(insertQuery, [content], function(err, results) {
+		if (err) {
+		console.log(err);
+		res.render('error');
+		}
+		console.log("Data inserted!1");
+		console.log(results);
 
 
-	        var insertQuery3 = 'INSERT hashtag_connection (idreview,idhashtag,idrestaurant)SELECT t.idreview,h.idhashtag ,t.idrestaurant FROM review t, hashtag h WHERE t.review =? AND h.content= ?';
-	        connection.query(insertQuery3, [ review, content], function(err, results) {
-	          if (err) {
-	            console.log(err);
-	            res.render('error');
-	          }
-	          console.log("Data inserted!3");
-	          console.log(results);
-						res.redirect('/restaurant/'+ req.params.restaurantid);
 
-	        });
-	      });
-	    });
-	  });
+		var insertQuery2 = 'INSERT INTO review (user_num,idrestaurant,review ,star)  VALUES (?,?,?,?)';
+		connection.query(insertQuery2, [user_num, req.params.restaurantid, review, star], function(err, results) {
+		if (err) {
+			console.log(err);
+			res.render('error');
+		}
+		console.log("Data inserted!2");
+		console.log(results);
+
+
+		var insertQuery3 = 'INSERT hashtag_connection (idreview,idhashtag,idrestaurant)SELECT t.idreview,h.idhashtag ,t.idrestaurant FROM review t, hashtag h WHERE t.review =? AND h.content= ?';
+		connection.query(insertQuery3, [ review, content], function(err, results) {
+			if (err) {
+			console.log(err);
+			res.render('error');
+			}
+			console.log("Data inserted!3");
+			console.log(results);
+					res.redirect('/restaurant/'+ req.params.restaurantid);
+
+		});
+		});
+	});
+	});
 }

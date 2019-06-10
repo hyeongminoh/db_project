@@ -22,7 +22,7 @@
 			<div class="col-md-3">
 				<div class="category-sidebar">
 					<div class="widget category-list">
-	<h4 class="widget-header">메뉴</h4>
+	<b class="widget-header">메뉴</b>
 	<ul class="category-list">
 		<% types.forEach(function(type){ %>
 		<li><a href="/category/<%= type.idmenu_type %>"><%= type.type %></a></li>
@@ -31,7 +31,7 @@
 </div>
 
 <div class="widget category-list">
-	<h4 class="widget-header">위치</h4>
+	<b class="widget-header">위치</b>
 	<ul class="category-list">
 		<% locations.forEach(function(location){ %>
 		<li><a href="category"><%= location.loc_name %></a></li>
