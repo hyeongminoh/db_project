@@ -19,6 +19,7 @@
 			font-size: 24px;
 			color: #d17581;
 		}
+
 	</style>
 </head>
 
@@ -97,7 +98,6 @@
 							<th scope="col">content</th>
 							<th scope="col">review</th>
 							<th scope="col">star</th>
-							<th scope="col">like</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -117,7 +117,6 @@
 								☆
 								<% } %>
 								<%}%></td>
-							<td><%=review[j].like%></td>
 						</tr>
 						<% } %>
 						<% } %>
@@ -128,7 +127,7 @@
 				<h2>리뷰를 입력해주세요</h2>
 				<hr>
 				<div class="import review">
-					<form action="/restaurant/<%= info.idrestaurant %> "method="POST">
+	<form action="/restaurant/<%= info.idrestaurant %> "method="POST">
 						<label for="content">학번</label>
 							<input type="text" class="form-control" id="user_num" name="user_num">
 							<label for="content">해시태그</label>
