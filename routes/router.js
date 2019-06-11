@@ -307,10 +307,13 @@ module.exports = function (app) {
         const sess = req.session;
         var body = req.body;
         var searchword = body.searchword;
-        console.log(searchword);
+        var hashtag = body.hashtag;
+        console.log('식당',searchword);
+        console.log('hashtag',hashtag);
         var locatons;
         var types;
-        connection.query('SELECT * FROM menu_type', (err, results) => {
+        if(hashtag == ""){
+             connection.query('SELECT * FROM menu_type', (err, results) => {
             if (err) {
                 console.log(err);
                 res.render('error');
@@ -343,6 +346,44 @@ module.exports = function (app) {
                 });
             });
         });
+       
+        }else{
+             connection.query('SELECT * FROM menu_type', (err, results) => {
+            if (err) {
+                console.log(err);
+                res.render('error');
+            }
+            types = results;
+            connection.query('SELECT * FROM location', (err, results) => {
+                if (err) {
+                    console.log(err);
+                    res.render('error');
+                }
+                locations = results;
+                sql = "SELECT DISTINCT r.r_name , r.idrestaurant, h.content, r.image FROM restaurant r, hashtag_connection c, hashtag h WHERE c.idhashtag= h.idhashtag AND c.idrestaurant = r.idrestaurant AND h.content = ?";
+                connection.query(sql, [hashtag] , (err, results) => {
+                    if (err) {
+                        console.log(err);
+                        res.render('error');
+                    }
+
+                    console.log(types);
+                    console.log(locations);
+                    console.log(results);
+
+                    res.render('hashtag', {
+                        'types': types,
+                        'locations': locations,
+                        'search_results': results,
+                        'searchword': hashtag,
+                        session : sess
+                    });
+
+                });
+            });
+        });
+        }
+
     });
 
         //로그인 코드
