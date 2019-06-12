@@ -29,7 +29,7 @@ CREATE TABLE `group_post` (
   `content` varchar(255) NOT NULL,
   `post_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idgroup_post`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,7 +55,8 @@ CREATE TABLE `group_reply` (
   `user_num` int(11) NOT NULL,
   `content` varchar(255) NOT NULL,
   `reply_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`idgroup_reply`)
+  PRIMARY KEY (`idgroup_reply`),
+  UNIQUE KEY `user_num_UNIQUE` (`user_num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -79,8 +80,9 @@ DROP TABLE IF EXISTS `hashtag`;
 CREATE TABLE `hashtag` (
   `idhashtag` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(50) NOT NULL,
-  PRIMARY KEY (`idhashtag`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idhashtag`),
+  UNIQUE KEY `content_UNIQUE` (`content`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +91,7 @@ CREATE TABLE `hashtag` (
 
 LOCK TABLES `hashtag` WRITE;
 /*!40000 ALTER TABLE `hashtag` DISABLE KEYS */;
-INSERT INTO `hashtag` VALUES (1,'#가성비'),(2,'#경희대'),(3,'#경희대맛집'),(4,'#감성'),(5,'#영통역맛집'),(6,'#경희대국제캠퍼스'),(7,'#사케동'),(8,'#일식'),(9,'#힐링'),(10,'#데이트맛집'),(11,'#영통역'),(12,'#영통맛집'),(13,'#럽스타그램');
+INSERT INTO `hashtag` VALUES (1,'#가성비'),(4,'#감성'),(2,'#경희대'),(6,'#경희대국제캠퍼스'),(3,'#경희대맛집'),(35,'#굿'),(10,'#데이트맛집'),(13,'#럽스타그램'),(28,'#분위기갑 '),(7,'#사케동'),(29,'#여기왜안가?'),(12,'#영통맛집'),(11,'#영통역'),(5,'#영통역맛집'),(31,'#인생맛집 '),(8,'#일식'),(24,'#존맛탱'),(30,'#초밥맛집 '),(9,'#힐링');
 /*!40000 ALTER TABLE `hashtag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +108,7 @@ CREATE TABLE `hashtag_connection` (
   `idhashtag` int(11) NOT NULL,
   `idrestaurant` int(11) NOT NULL,
   PRIMARY KEY (`idhashtag_connection`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +117,7 @@ CREATE TABLE `hashtag_connection` (
 
 LOCK TABLES `hashtag_connection` WRITE;
 /*!40000 ALTER TABLE `hashtag_connection` DISABLE KEYS */;
-INSERT INTO `hashtag_connection` VALUES (1,1,1,2),(2,2,1,2),(3,3,1,2),(4,4,1,2),(5,5,1,2),(6,6,1,7),(7,7,2,5),(8,8,4,3),(9,9,3,2),(10,10,5,7),(11,11,9,9),(12,12,8,10),(13,13,2,10);
+INSERT INTO `hashtag_connection` VALUES (1,1,1,2),(2,2,1,2),(3,3,1,2),(4,4,1,2),(5,5,1,2),(6,6,1,7),(7,7,2,5),(8,8,4,3),(9,9,3,2),(10,10,5,7),(11,11,9,9),(12,12,8,10),(13,13,2,10),(14,1,2,2),(15,1,3,2),(18,20,1,3),(19,20,24,3),(20,21,28,16),(21,21,29,16),(22,22,30,8),(23,22,31,8),(24,22,24,8),(25,23,3,8),(26,23,29,8),(27,23,35,8);
 /*!40000 ALTER TABLE `hashtag_connection` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,10 +243,8 @@ CREATE TABLE `review` (
   `idrestaurant` int(11) NOT NULL,
   `review` varchar(255) NOT NULL,
   `star` int(11) DEFAULT '0',
-  `like` int(11) DEFAULT '0',
-  PRIMARY KEY (`idreview`),
-  UNIQUE KEY `user_num_UNIQUE` (`user_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idreview`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +253,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (1,2,2,'그냥 그럼.가게가 작다',3,2),(2,3,2,'개 맛있음',5,1),(3,4,2,'가성비 좋다',4,2),(4,5,2,'자리가 좁다',2,2),(5,6,2,'카레가 맛있다.',3,0),(6,7,3,'초밥 좋아하면 꼭 가야됨.',4,2),(7,8,2,'일본 감성 뿜뿜',4,2),(8,9,2,'사케동 먹고 싶으면 가는 곳',5,6),(9,10,2,'라멘 먹고싶은면 항상 방문',5,2),(10,11,2,'사장님이 친절하시다',3,1),(11,12,2,'내 입맛에는 별로...',1,3),(12,13,3,'라멘은 여기가 제일 맛있음',5,3),(13,14,3,'전형적인 라멘짐',3,1);
+INSERT INTO `review` VALUES (2,3,2,'개 맛있음',5),(3,4,2,'가성비 좋다',4),(4,5,2,'자리가 좁다',2),(5,6,2,'카레가 맛있다.',3),(6,7,3,'초밥 좋아하면 꼭 가야됨.',4),(7,8,2,'일본 감성 뿜뿜',4),(8,9,2,'사케동 먹고 싶으면 가는 곳',5),(9,10,2,'라멘 먹고싶은면 항상 방문',5),(10,11,2,'사장님이 친절하시다',3),(11,12,2,'내 입맛에는 별로...',1),(12,13,3,'라멘은 여기가 제일 맛있음',5),(13,14,3,'전형적인 라멘짐',3),(18,0,2,'너무 맛있어요!',5),(19,0,2,'귣귣',3),(20,0,3,'귣귣',3),(21,0,16,'너무 조아요!!!',5),(22,0,8,'조금 비싸지만 맛있어요',4),(23,0,8,'굿굿굿 여기 꼭 가세여',5);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +282,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'0621','오형민',960621,'치즈사이다'),(1,'0715','정선교',910715,'사랑꾼'),(2,'1213', '김철수', 971213,'학식요정'),(3,'0505','이영희', 940505, '밤샘야식');
+INSERT INTO `user` VALUES (0,'0621','오형민',960621,'치즈사이다'),(1,'0715','정선교',910715,'사랑꾼');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -295,4 +295,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-09 15:24:26
+-- Dump completed on 2019-06-11  1:41:44

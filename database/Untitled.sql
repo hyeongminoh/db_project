@@ -106,9 +106,8 @@ CREATE TABLE `hashtag_connection` (
   `idhashtag_connection` int(11) NOT NULL AUTO_INCREMENT,
   `idreview` int(11) NOT NULL,
   `idhashtag` int(11) NOT NULL,
-  `idrestaurant` int(11) NOT NULL,
   PRIMARY KEY (`idhashtag_connection`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +116,7 @@ CREATE TABLE `hashtag_connection` (
 
 LOCK TABLES `hashtag_connection` WRITE;
 /*!40000 ALTER TABLE `hashtag_connection` DISABLE KEYS */;
-INSERT INTO `hashtag_connection` VALUES (1,1,1,2),(2,2,1,2),(3,3,1,2),(4,4,1,2),(5,5,1,2),(6,6,1,7),(7,7,2,5),(8,8,4,3),(9,9,3,2),(10,10,5,7),(11,11,9,9),(12,12,8,10),(13,13,2,10),(14,1,2,2),(15,1,3,2),(18,20,1,3),(19,20,24,3),(20,21,28,16),(21,21,29,16),(22,22,30,8),(23,22,31,8),(24,22,24,8),(25,23,3,8),(26,23,29,8),(27,23,35,8);
+INSERT INTO `hashtag_connection` VALUES (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,5,1),(6,6,1),(7,7,2),(8,8,4),(9,9,3),(10,10,5),(11,11,9),(12,12,8),(13,13,2),(14,2,2),(15,2,3),(18,20,1),(19,20,24),(20,21,28),(21,21,29),(22,22,30),(23,22,31),(24,22,24),(25,23,3),(26,23,29),(27,23,35);
 /*!40000 ALTER TABLE `hashtag_connection` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-11  1:41:44
+-- Dump completed on 2019-06-12 12:39:21
