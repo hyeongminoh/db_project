@@ -106,7 +106,7 @@ module.exports = function(app){
 											temp.idreview = row[i].idreview
 											temp.star = row[i].star
 											review.push(temp)
-											var sqlquery5 ="SELECT h.content FROM hashtag h, hashtag_connection c WHERE h.idhashtag = c.idhashtag and c.idreview = ? and c.idrestaurant=?";
+											var sqlquery5 ="SELECT h.content FROM hashtag h, hashtag_connection c, review r WHERE h.idhashtag = c.idhashtag and r.idreview = c.idreview and c.idreview = ? and r.idrestaurant=?";
 											console.log("reviewid", row[i].idreview)
 											var reviewid = row[i].idreview
 											connection.query(sqlquery5, [row[i].idreview,req.params.restaurantid] ,function(err, row1)  {
@@ -134,6 +134,8 @@ module.exports = function(app){
             });
         });
 	});
+})
+})
     
     app.post('/restaurant/:restaurantid', async(req, res,next)  => {
 	if(req.session.user_info == undefined){
@@ -173,8 +175,8 @@ module.exports = function(app){
 					var sqlquery5 = "select * from hashtag where content = ?"
 					var row2 = await query(sqlquery5, selectedhashtag)
 					var idhashtag = row2[0].idhashtag
-					var sqlquery6 ="insert into hashtag_connection(idreview,idhashtag,idrestaurant) values (?,?,?)"
-					var row3 = query(sqlquery6, [reviewid,idhashtag,req.params.restaurantid])
+					var sqlquery6 ="insert into hashtag_connection(idreview,idhashtag) values (?,?)"
+					var row3 = query(sqlquery6, [reviewid,idhashtag])
 					if (!row3) {
 						console.log(err);
 						res.render('error');
@@ -190,6 +192,6 @@ module.exports = function(app){
 			}
 		})
 
-	})
-})
+	
+
 }
